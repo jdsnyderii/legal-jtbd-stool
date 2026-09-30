@@ -1,0 +1,62 @@
+id: https://example.org/legal-jtbd/graph-foundation
+name: GraphFoundation
+title: Storage-independent Graph Foundations
+version: 0.2.0
+description: >
+  Common identity and graph-role annotations used by the three JTBD models.
+  Identity is purely semantic (CURIE/IRI). Storage technology is out of scope.
+prefixes:
+  linkml: https://w3id.org/linkml/
+  gf: https://example.org/legal-jtbd/graph-foundation/
+  skos: http://www.w3.org/2004/02/skos/core#
+default_prefix: gf
+imports:
+  - linkml:types
+types:
+  SemanticId:
+    typeof: uriorcurie
+    description: Storage-independent semantic identifier (CURIE or IRI).
+classes:
+  Identifiable:
+    abstract: true
+    description: Any element that has a stable semantic identity.
+    slots: [id, pref_label, description, status, version]
+    slot_usage:
+      id:
+        identifier: true
+        required: true
+        range: SemanticId
+  GraphNode:
+    abstract: true
+    is_a: Identifiable
+    annotations:
+      graph_role: node
+    description: Domain entity that should be treated as a graph node.
+  GraphEdge:
+    abstract: true
+    is_a: Identifiable
+    annotations:
+      graph_role: edge
+    description: First-class relationship with its own identity and attributes.
+slots:
+  id:
+    identifier: true
+    range: SemanticId
+    description: Canonical, storage-independent identifier.
+  pref_label:
+    range: string
+    description: Human-readable preferred label.
+  description:
+    range: string
+  status:
+    range: LifecycleStatus
+    required: true
+  version:
+    range: string
+enums:
+  LifecycleStatus:
+    permissible_values:
+      draft: {}
+      active: {}
+      deprecated: {}
+      archived: {}
