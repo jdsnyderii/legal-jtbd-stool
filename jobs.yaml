@@ -1,0 +1,158 @@
+id: https://example.org/legal-jtbd/jobs
+name: LegalJTBDJobs
+title: Jobs to Be Done (Legal / Litigation)
+version: 0.5.0
+description: >
+  Kalbach-style JTBD with top/mid/micro hierarchy and descriptive fields (v0.5.0).
+  Process remains hierarchical (parent/child/sequence/iterative).
+prefixes:
+  linkml: https://w3id.org/linkml/
+  jtbd: https://example.org/legal-jtbd/jobs/
+  gf: https://example.org/legal-jtbd/graph-foundation/
+default_prefix: jtbd
+imports:
+  - linkml:types
+  - gf:graph_foundation
+classes:
+  Job:
+    is_a: GraphNode
+    slots:
+      - job_level
+      - parent_job
+      - phase
+      - sali_tags
+      - desired_outcomes
+      - child_jobs
+      - related_jobs
+      - last_reviewed
+      - sequence_order
+      - iterative
+      - job_statement
+      - statement_verb
+      - statement_object
+      - statement_clarifier
+      - job_performer
+      - buyer_role
+      - circumstance_situation
+      - circumstance_constraints
+      - emotional_job
+      - social_job
+      - end_state
+      - job_story_situation
+      - job_story_motivation
+      - job_story_expected_outcome
+    slot_usage:
+      id:
+        pattern: '^jtbd:JOB-[A-Z0-9-]+$'
+      job_level:
+        required: true
+  DesiredOutcome:
+    is_a: GraphNode
+    slots:
+      - statement
+      - direction
+      - unit_of_measure
+      - object_of_control
+      - qualifier
+      - importance
+      - satisfaction
+      - opportunity_score
+      - related_job
+    slot_usage:
+      id:
+        pattern: '^jtbd:OUT-[A-Z0-9-]+$'
+slots:
+  job_level:
+    range: JobLevel
+    required: true
+  parent_job:
+    range: Job
+  child_jobs:
+    range: Job
+    multivalued: true
+  phase:
+    range: LitigationPhase
+  sali_tags:
+    range: uriorcurie
+    multivalued: true
+  desired_outcomes:
+    range: DesiredOutcome
+    multivalued: true
+  related_jobs:
+    range: Job
+    multivalued: true
+  sequence_order:
+    range: integer
+  iterative:
+    range: boolean
+  last_reviewed:
+    range: date
+  job_statement:
+    range: string
+  statement_verb:
+    range: string
+  statement_object:
+    range: string
+  statement_clarifier:
+    range: string
+  job_performer:
+    range: string
+  buyer_role:
+    range: string
+  circumstance_situation:
+    range: string
+  circumstance_constraints:
+    range: string
+    multivalued: true
+  emotional_job:
+    range: string
+  social_job:
+    range: string
+  end_state:
+    range: string
+  job_story_situation:
+    range: string
+  job_story_motivation:
+    range: string
+  job_story_expected_outcome:
+    range: string
+  statement:
+    range: string
+  direction:
+    range: OutcomeDirection
+  unit_of_measure:
+    range: string
+  object_of_control:
+    range: string
+  qualifier:
+    range: string
+  importance:
+    range: integer
+  satisfaction:
+    range: integer
+  opportunity_score:
+    range: float
+  related_job:
+    range: Job
+enums:
+  JobLevel:
+    permissible_values:
+      top_level: {}
+      mid_level: {}
+      micro: {}
+  LitigationPhase:
+    permissible_values:
+      pre_litigation: {}
+      pleadings: {}
+      case_management: {}
+      discovery: {}
+      pretrial: {}
+      trial: {}
+      post_trial: {}
+      resolution: {}
+      cross_cutting: {}
+  OutcomeDirection:
+    permissible_values:
+      minimize: {}
+      maximize: {}
+      maintain: {}
