@@ -1,0 +1,2284 @@
+name: LegalJTBDUnifiedRelational
+id: https://example.org/legal-jtbd/unified_relational
+prefixes:
+  linkml:
+    prefix_prefix: linkml
+    prefix_reference: https://w3id.org/linkml/
+  jtbd:
+    prefix_prefix: jtbd
+    prefix_reference: https://example.org/legal-jtbd/jobs/
+  gf:
+    prefix_prefix: gf
+    prefix_reference: https://example.org/legal-jtbd/graph-foundation/
+  skos:
+    prefix_prefix: skos
+    prefix_reference: http://www.w3.org/2004/02/skos/core#
+  sali:
+    prefix_prefix: sali
+    prefix_reference: https://sali.org/lmss/
+  inv:
+    prefix_prefix: inv
+    prefix_reference: https://example.org/legal-jtbd/investments/
+  req:
+    prefix_prefix: req
+    prefix_reference: https://example.org/legal-jtbd/product-requirements/
+  xsd:
+    prefix_prefix: xsd
+    prefix_reference: http://www.w3.org/2001/XMLSchema#
+  shex:
+    prefix_prefix: shex
+    prefix_reference: http://www.w3.org/ns/shex#
+  schema:
+    prefix_prefix: schema
+    prefix_reference: http://schema.org/
+  rr:
+    prefix_prefix: rr
+    prefix_reference: http://www.w3.org/ns/r2rml#
+default_prefix: https://example.org/legal-jtbd/unified_relational/
+types:
+  SemanticId:
+    name: SemanticId
+    description: Storage-independent semantic identifier (CURIE or IRI).
+    from_schema: https://example.org/legal-jtbd/unified_relational
+    typeof: string
+  string:
+    name: string
+    description: A character string
+    notes:
+    - In RDF serializations, a slot with range of string is treated as a literal or
+      type xsd:string. If you are authoring schemas in LinkML YAML, the type is referenced
+      with the lower case "string".
+    from_schema: https://example.org/legal-jtbd/unified_relational
+    exact_mappings:
+    - schema:Text
+    base: str
+    uri: xsd:string
+  integer:
+    name: integer
+    description: An integer
+    notes:
+    - If you are authoring schemas in LinkML YAML, the type is referenced with the
+      lower case "integer".
+    from_schema: https://example.org/legal-jtbd/unified_relational
+    exact_mappings:
+    - schema:Integer
+    base: int
+    uri: xsd:integer
+  boolean:
+    name: boolean
+    description: A binary (true or false) value
+    notes:
+    - If you are authoring schemas in LinkML YAML, the type is referenced with the
+      lower case "boolean".
+    from_schema: https://example.org/legal-jtbd/unified_relational
+    exact_mappings:
+    - schema:Boolean
+    base: Bool
+    uri: xsd:boolean
+    repr: bool
+  float:
+    name: float
+    description: A real number that conforms to the xsd:float specification
+    notes:
+    - If you are authoring schemas in LinkML YAML, the type is referenced with the
+      lower case "float".
+    from_schema: https://example.org/legal-jtbd/unified_relational
+    exact_mappings:
+    - schema:Float
+    base: float
+    uri: xsd:float
+  double:
+    name: double
+    description: A real number that conforms to the xsd:double specification
+    notes:
+    - If you are authoring schemas in LinkML YAML, the type is referenced with the
+      lower case "double".
+    from_schema: https://example.org/legal-jtbd/unified_relational
+    close_mappings:
+    - schema:Float
+    base: float
+    uri: xsd:double
+  decimal:
+    name: decimal
+    description: A real number with arbitrary precision that conforms to the xsd:decimal
+      specification
+    notes:
+    - If you are authoring schemas in LinkML YAML, the type is referenced with the
+      lower case "decimal".
+    from_schema: https://example.org/legal-jtbd/unified_relational
+    broad_mappings:
+    - schema:Number
+    base: Decimal
+    uri: xsd:decimal
+  time:
+    name: time
+    description: A time object represents a (local) time of day, independent of any
+      particular day
+    notes:
+    - URI is dateTime because OWL reasoners do not work with straight date or time
+    - If you are authoring schemas in LinkML YAML, the type is referenced with the
+      lower case "time".
+    from_schema: https://example.org/legal-jtbd/unified_relational
+    exact_mappings:
+    - schema:Time
+    base: XSDTime
+    uri: xsd:time
+    repr: str
+  date:
+    name: date
+    description: a date (year, month and day) in an idealized calendar
+    notes:
+    - URI is dateTime because OWL reasoners don't work with straight date or time
+    - If you are authoring schemas in LinkML YAML, the type is referenced with the
+      lower case "date".
+    from_schema: https://example.org/legal-jtbd/unified_relational
+    exact_mappings:
+    - schema:Date
+    base: XSDDate
+    uri: xsd:date
+    repr: str
+  datetime:
+    name: datetime
+    description: The combination of a date and time
+    notes:
+    - If you are authoring schemas in LinkML YAML, the type is referenced with the
+      lower case "datetime".
+    from_schema: https://example.org/legal-jtbd/unified_relational
+    exact_mappings:
+    - schema:DateTime
+    base: XSDDateTime
+    uri: xsd:dateTime
+    repr: str
+  date_or_datetime:
+    name: date_or_datetime
+    description: Either a date or a datetime
+    notes:
+    - If you are authoring schemas in LinkML YAML, the type is referenced with the
+      lower case "date_or_datetime".
+    from_schema: https://example.org/legal-jtbd/unified_relational
+    base: str
+    uri: linkml:DateOrDatetime
+    repr: str
+  uriorcurie:
+    name: uriorcurie
+    description: a URI or a CURIE
+    notes:
+    - If you are authoring schemas in LinkML YAML, the type is referenced with the
+      lower case "uriorcurie".
+    from_schema: https://example.org/legal-jtbd/unified_relational
+    base: URIorCURIE
+    uri: xsd:anyURI
+    repr: str
+  curie:
+    name: curie
+    conforms_to: https://www.w3.org/TR/curie/
+    description: a compact URI
+    notes:
+    - If you are authoring schemas in LinkML YAML, the type is referenced with the
+      lower case "curie".
+    comments:
+    - in RDF serializations this MUST be expanded to a URI
+    - in non-RDF serializations MAY be serialized as the compact representation
+    from_schema: https://example.org/legal-jtbd/unified_relational
+    base: Curie
+    uri: xsd:string
+    repr: str
+  uri:
+    name: uri
+    conforms_to: https://www.ietf.org/rfc/rfc3987.txt
+    description: a complete URI
+    notes:
+    - If you are authoring schemas in LinkML YAML, the type is referenced with the
+      lower case "uri".
+    comments:
+    - in RDF serializations a slot with range of uri is treated as a literal or type
+      xsd:anyURI unless it is an identifier or a reference to an identifier, in which
+      case it is translated directly to a node
+    from_schema: https://example.org/legal-jtbd/unified_relational
+    close_mappings:
+    - schema:URL
+    base: URI
+    uri: xsd:anyURI
+    repr: str
+  ncname:
+    name: ncname
+    description: Prefix part of CURIE
+    notes:
+    - If you are authoring schemas in LinkML YAML, the type is referenced with the
+      lower case "ncname".
+    from_schema: https://example.org/legal-jtbd/unified_relational
+    base: NCName
+    uri: xsd:string
+    repr: str
+  objectidentifier:
+    name: objectidentifier
+    description: A URI or CURIE that represents an object in the model.
+    notes:
+    - If you are authoring schemas in LinkML YAML, the type is referenced with the
+      lower case "objectidentifier".
+    comments:
+    - Used for inheritance and type checking
+    from_schema: https://example.org/legal-jtbd/unified_relational
+    base: ElementIdentifier
+    uri: shex:iri
+    repr: str
+  nodeidentifier:
+    name: nodeidentifier
+    description: A URI, CURIE or BNODE that represents a node in a model.
+    notes:
+    - If you are authoring schemas in LinkML YAML, the type is referenced with the
+      lower case "nodeidentifier".
+    from_schema: https://example.org/legal-jtbd/unified_relational
+    base: NodeIdentifier
+    uri: shex:nonLiteral
+    repr: str
+  jsonpointer:
+    name: jsonpointer
+    conforms_to: https://datatracker.ietf.org/doc/html/rfc6901
+    description: A string encoding a JSON Pointer. The value of the string MUST conform
+      to JSON Point syntax and SHOULD dereference to a valid object within the current
+      instance document when encoded in tree form.
+    notes:
+    - If you are authoring schemas in LinkML YAML, the type is referenced with the
+      lower case "jsonpointer".
+    from_schema: https://example.org/legal-jtbd/unified_relational
+    base: str
+    uri: xsd:string
+    repr: str
+  jsonpath:
+    name: jsonpath
+    conforms_to: https://www.ietf.org/archive/id/draft-goessner-dispatch-jsonpath-00.html
+    description: A string encoding a JSON Path. The value of the string MUST conform
+      to JSON Point syntax and SHOULD dereference to zero or more valid objects within
+      the current instance document when encoded in tree form.
+    notes:
+    - If you are authoring schemas in LinkML YAML, the type is referenced with the
+      lower case "jsonpath".
+    from_schema: https://example.org/legal-jtbd/unified_relational
+    base: str
+    uri: xsd:string
+    repr: str
+  sparqlpath:
+    name: sparqlpath
+    conforms_to: https://www.w3.org/TR/sparql11-query/#propertypaths
+    description: A string encoding a SPARQL Property Path. The value of the string
+      MUST conform to SPARQL syntax and SHOULD dereference to zero or more valid objects
+      within the current instance document when encoded as RDF.
+    notes:
+    - If you are authoring schemas in LinkML YAML, the type is referenced with the
+      lower case "sparqlpath".
+    from_schema: https://example.org/legal-jtbd/unified_relational
+    base: str
+    uri: xsd:string
+    repr: str
+enums:
+  LifecycleStatus:
+    name: LifecycleStatus
+    from_schema: https://example.org/legal-jtbd/unified_relational
+    permissible_values:
+      draft:
+        text: draft
+      active:
+        text: active
+      deprecated:
+        text: deprecated
+      archived:
+        text: archived
+  JobLevel:
+    name: JobLevel
+    from_schema: https://example.org/legal-jtbd/unified_relational
+    permissible_values:
+      top_level:
+        text: top_level
+        description: Main Job — broad, stable objective the performer is trying to
+          achieve.
+      mid_level:
+        text: mid_level
+        description: Stage / major step in the job map (often aligned to a litigation
+          phase).
+      micro:
+        text: micro
+        description: Micro-job — smallest actionable objective inside a mid_level
+          stage.
+  LitigationPhase:
+    name: LitigationPhase
+    from_schema: https://example.org/legal-jtbd/unified_relational
+    permissible_values:
+      pre_litigation:
+        text: pre_litigation
+        description: Pre-litigation / Investigation & Assessment
+      pleadings:
+        text: pleadings
+        description: Pleadings / Case Initiation
+      discovery:
+        text: discovery
+        description: Discovery
+      pretrial:
+        text: pretrial
+        description: Pretrial / Motions & Case Management
+      trial:
+        text: trial
+        description: Trial / Hearing
+      post_trial:
+        text: post_trial
+        description: Post-trial / Appeal / Enforcement
+      resolution:
+        text: resolution
+        description: Resolution / Settlement / Closure
+      cross_cutting:
+        text: cross_cutting
+        description: Cross-cutting (applies to multiple phases)
+  OutcomeDirection:
+    name: OutcomeDirection
+    from_schema: https://example.org/legal-jtbd/unified_relational
+    permissible_values:
+      minimize:
+        text: minimize
+      maximize:
+        text: maximize
+      increase:
+        text: increase
+      decrease:
+        text: decrease
+      reduce:
+        text: reduce
+      raise:
+        text: raise
+  InvestmentHorizon:
+    name: InvestmentHorizon
+    from_schema: https://example.org/legal-jtbd/unified_relational
+    permissible_values:
+      now:
+        text: now
+      next:
+        text: next
+      later:
+        text: later
+      explore:
+        text: explore
+  RequirementType:
+    name: RequirementType
+    from_schema: https://example.org/legal-jtbd/unified_relational
+    permissible_values:
+      functional:
+        text: functional
+      non_functional:
+        text: non_functional
+      constraint:
+        text: constraint
+      business_rule:
+        text: business_rule
+      data:
+        text: data
+      interface:
+        text: interface
+  CapabilityType:
+    name: CapabilityType
+    from_schema: https://example.org/legal-jtbd/unified_relational
+    permissible_values:
+      core:
+        text: core
+      supporting:
+        text: supporting
+      enabling:
+        text: enabling
+      partner:
+        text: partner
+      commodity:
+        text: commodity
+  PriorityLevel:
+    name: PriorityLevel
+    from_schema: https://example.org/legal-jtbd/unified_relational
+    permissible_values:
+      must:
+        text: must
+      should:
+        text: should
+      could:
+        text: could
+      wont:
+        text: wont
+  ImplementationStatus:
+    name: ImplementationStatus
+    from_schema: https://example.org/legal-jtbd/unified_relational
+    permissible_values:
+      idea:
+        text: idea
+      planned:
+        text: planned
+      in_progress:
+        text: in_progress
+      delivered:
+        text: delivered
+      deprecated:
+        text: deprecated
+slots:
+  sali_tags:
+    name: sali_tags
+    annotations:
+      primary_key:
+        tag: primary_key
+        value: 'true'
+    description: External SALI LMSS concept CURIEs (not in-schema classes). Stored
+      as TEXT in SQL.
+    from_schema: https://example.org/legal-jtbd/unified_relational
+    domain_of:
+    - Job
+    - Job_sali_tags
+    range: uriorcurie
+    multivalued: true
+  desired_outcomes:
+    name: desired_outcomes
+    annotations:
+      forwardref:
+        tag: forwardref
+        value: 'true'
+      primary_key:
+        tag: primary_key
+        value: 'true'
+      foreign_key:
+        tag: foreign_key
+        value: DesiredOutcome.id
+    from_schema: https://example.org/legal-jtbd/unified_relational
+    domain_of:
+    - Job
+    - Job_desired_outcomes
+    range: DesiredOutcome
+    multivalued: true
+  child_jobs:
+    name: child_jobs
+    annotations:
+      forwardref:
+        tag: forwardref
+        value: 'true'
+      primary_key:
+        tag: primary_key
+        value: 'true'
+      foreign_key:
+        tag: foreign_key
+        value: Job.id
+    description: 'Convenience inverse of parent_job. Especially useful for listing
+      the micro-jobs that belong to a mid_level stage.
+
+      '
+    from_schema: https://example.org/legal-jtbd/unified_relational
+    domain_of:
+    - Job
+    - Job_child_jobs
+    range: Job
+    multivalued: true
+  related_jobs:
+    name: related_jobs
+    annotations:
+      forwardref:
+        tag: forwardref
+        value: 'true'
+      primary_key:
+        tag: primary_key
+        value: 'true'
+      foreign_key:
+        tag: foreign_key
+        value: Job.id
+    description: Lateral (non-hierarchical) relationships between jobs.
+    from_schema: https://example.org/legal-jtbd/unified_relational
+    domain_of:
+    - Job
+    - Job_related_jobs
+    range: Job
+    multivalued: true
+  product_outcomes:
+    name: product_outcomes
+    annotations:
+      forwardref:
+        tag: forwardref
+        value: 'true'
+      primary_key:
+        tag: primary_key
+        value: 'true'
+      foreign_key:
+        tag: foreign_key
+        value: ProductOutcome.id
+    from_schema: https://example.org/legal-jtbd/unified_relational
+    domain_of:
+    - InvestmentLane
+    - InvestmentLane_product_outcomes
+    range: ProductOutcome
+    multivalued: true
+  informed_by_outcomes:
+    name: informed_by_outcomes
+    annotations:
+      forwardref:
+        tag: forwardref
+        value: 'true'
+      primary_key:
+        tag: primary_key
+        value: 'true'
+      foreign_key:
+        tag: foreign_key
+        value: DesiredOutcome.id
+    description: Kalbach desired outcomes this product outcome is designed to improve.
+    from_schema: https://example.org/legal-jtbd/unified_relational
+    domain_of:
+    - ProductOutcome
+    - ProductOutcome_informed_by_outcomes
+    range: DesiredOutcome
+    multivalued: true
+  realizes_product_outcomes:
+    name: realizes_product_outcomes
+    annotations:
+      forwardref:
+        tag: forwardref
+        value: 'true'
+      primary_key:
+        tag: primary_key
+        value: 'true'
+      foreign_key:
+        tag: foreign_key
+        value: ProductOutcome.id
+    description: Product outcomes this requirement helps realize.
+    from_schema: https://example.org/legal-jtbd/unified_relational
+    domain_of:
+    - Requirement
+    - Requirement_realizes_product_outcomes
+    range: ProductOutcome
+    multivalued: true
+  satisfied_by_capabilities:
+    name: satisfied_by_capabilities
+    annotations:
+      forwardref:
+        tag: forwardref
+        value: 'true'
+      primary_key:
+        tag: primary_key
+        value: 'true'
+      foreign_key:
+        tag: foreign_key
+        value: Capability.id
+    from_schema: https://example.org/legal-jtbd/unified_relational
+    domain_of:
+    - Requirement
+    - Requirement_satisfied_by_capabilities
+    range: Capability
+    multivalued: true
+  acceptance_criteria:
+    name: acceptance_criteria
+    annotations:
+      primary_key:
+        tag: primary_key
+        value: 'true'
+    from_schema: https://example.org/legal-jtbd/unified_relational
+    domain_of:
+    - Requirement
+    - Requirement_acceptance_criteria
+    range: string
+    multivalued: true
+  satisfies_requirements:
+    name: satisfies_requirements
+    annotations:
+      forwardref:
+        tag: forwardref
+        value: 'true'
+      primary_key:
+        tag: primary_key
+        value: 'true'
+      foreign_key:
+        tag: foreign_key
+        value: Requirement.id
+    description: Requirements this capability satisfies.
+    from_schema: https://example.org/legal-jtbd/unified_relational
+    domain_of:
+    - Capability
+    - Capability_satisfies_requirements
+    range: Requirement
+    multivalued: true
+  supports_jobs:
+    name: supports_jobs
+    annotations:
+      forwardref:
+        tag: forwardref
+        value: 'true'
+      primary_key:
+        tag: primary_key
+        value: 'true'
+      foreign_key:
+        tag: foreign_key
+        value: Job.id
+    description: Jobs (any level) this capability supports.
+    from_schema: https://example.org/legal-jtbd/unified_relational
+    domain_of:
+    - Capability
+    - Capability_supports_jobs
+    range: Job
+    multivalued: true
+  supports_desired_outcomes:
+    name: supports_desired_outcomes
+    annotations:
+      forwardref:
+        tag: forwardref
+        value: 'true'
+      primary_key:
+        tag: primary_key
+        value: 'true'
+      foreign_key:
+        tag: foreign_key
+        value: DesiredOutcome.id
+    description: Desired outcomes this capability supports.
+    from_schema: https://example.org/legal-jtbd/unified_relational
+    domain_of:
+    - Capability
+    - Capability_supports_desired_outcomes
+    range: DesiredOutcome
+    multivalued: true
+classes:
+  Identifiable:
+    name: Identifiable
+    description: Any element that has a stable semantic identity.
+    from_schema: https://example.org/legal-jtbd/unified_relational
+    abstract: true
+    attributes:
+      id:
+        name: id
+        annotations:
+          primary_key:
+            tag: primary_key
+            value: 'true'
+          required:
+            tag: required
+            value: 'true'
+        description: Canonical, storage-independent identifier.
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        identifier: true
+        owner: Identifiable
+        domain_of:
+        - Identifiable
+        - GraphNode
+        - GraphEdge
+        - Job
+        - DesiredOutcome
+        - InvestmentLane
+        - ProductOutcome
+        - Requirement
+        - Capability
+        range: SemanticId
+        required: true
+      pref_label:
+        name: pref_label
+        description: Human-readable preferred label.
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        owner: Identifiable
+        domain_of:
+        - Identifiable
+        range: string
+      description:
+        name: description
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        owner: Identifiable
+        domain_of:
+        - Identifiable
+        - GraphNode
+        - GraphEdge
+        - Job
+        - DesiredOutcome
+        - InvestmentLane
+        - ProductOutcome
+        - Requirement
+        - Capability
+        range: string
+      status:
+        name: status
+        annotations:
+          required:
+            tag: required
+            value: 'true'
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        owner: Identifiable
+        domain_of:
+        - Identifiable
+        range: LifecycleStatus
+        required: true
+      version:
+        name: version
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        owner: Identifiable
+        domain_of:
+        - Identifiable
+        range: string
+    class_uri: jtbd:Identifiable
+  GraphNode:
+    name: GraphNode
+    description: Domain entity that should be treated as a graph node.
+    from_schema: https://example.org/legal-jtbd/unified_relational
+    is_a: Identifiable
+    abstract: true
+    attributes:
+      id:
+        name: id
+        annotations:
+          primary_key:
+            tag: primary_key
+            value: 'true'
+          required:
+            tag: required
+            value: 'true'
+        description: Canonical, storage-independent identifier.
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        identifier: true
+        owner: GraphNode
+        domain_of:
+        - Identifiable
+        - GraphNode
+        - GraphEdge
+        - Job
+        - DesiredOutcome
+        - InvestmentLane
+        - ProductOutcome
+        - Requirement
+        - Capability
+        range: SemanticId
+        required: true
+      pref_label:
+        name: pref_label
+        description: Human-readable preferred label.
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        owner: GraphNode
+        domain_of:
+        - Identifiable
+        range: string
+      description:
+        name: description
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        owner: GraphNode
+        domain_of:
+        - Identifiable
+        - GraphNode
+        - GraphEdge
+        - Job
+        - DesiredOutcome
+        - InvestmentLane
+        - ProductOutcome
+        - Requirement
+        - Capability
+        range: string
+      status:
+        name: status
+        annotations:
+          required:
+            tag: required
+            value: 'true'
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        owner: GraphNode
+        domain_of:
+        - Identifiable
+        range: LifecycleStatus
+        required: true
+      version:
+        name: version
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        owner: GraphNode
+        domain_of:
+        - Identifiable
+        range: string
+    class_uri: jtbd:GraphNode
+  GraphEdge:
+    name: GraphEdge
+    description: 'First-class relationship that itself carries identity and attributes.
+      Use when the edge needs its own metadata.
+
+      '
+    from_schema: https://example.org/legal-jtbd/unified_relational
+    is_a: Identifiable
+    abstract: true
+    attributes:
+      id:
+        name: id
+        annotations:
+          primary_key:
+            tag: primary_key
+            value: 'true'
+          required:
+            tag: required
+            value: 'true'
+        description: Canonical, storage-independent identifier.
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        identifier: true
+        owner: GraphEdge
+        domain_of:
+        - Identifiable
+        - GraphNode
+        - GraphEdge
+        - Job
+        - DesiredOutcome
+        - InvestmentLane
+        - ProductOutcome
+        - Requirement
+        - Capability
+        range: SemanticId
+        required: true
+      pref_label:
+        name: pref_label
+        description: Human-readable preferred label.
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        owner: GraphEdge
+        domain_of:
+        - Identifiable
+        range: string
+      description:
+        name: description
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        owner: GraphEdge
+        domain_of:
+        - Identifiable
+        - GraphNode
+        - GraphEdge
+        - Job
+        - DesiredOutcome
+        - InvestmentLane
+        - ProductOutcome
+        - Requirement
+        - Capability
+        range: string
+      status:
+        name: status
+        annotations:
+          required:
+            tag: required
+            value: 'true'
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        owner: GraphEdge
+        domain_of:
+        - Identifiable
+        range: LifecycleStatus
+        required: true
+      version:
+        name: version
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        owner: GraphEdge
+        domain_of:
+        - Identifiable
+        range: string
+    class_uri: jtbd:GraphEdge
+  Job:
+    name: Job
+    description: 'A job to be done at one of three Kalbach-aligned levels: top_level
+      (Main Job), mid_level (stage in the job map), or micro (micro-job inside a stage).
+
+      '
+    from_schema: https://example.org/legal-jtbd/unified_relational
+    is_a: GraphNode
+    attributes:
+      job_level:
+        name: job_level
+        annotations:
+          required:
+            tag: required
+            value: 'true'
+        description: 'top_level = Main Job; mid_level = stage / major step in the
+          job map; micro = micro-job (finest grain inside a stage).
+
+          '
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        owner: Job
+        domain_of:
+        - Job
+        range: JobLevel
+        required: true
+      phase:
+        name: phase
+        description: Coarse-grained litigation phase this job primarily belongs to.
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        owner: Job
+        domain_of:
+        - Job
+        range: LitigationPhase
+      last_reviewed:
+        name: last_reviewed
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        owner: Job
+        domain_of:
+        - Job
+        range: date
+      sequence_order:
+        name: sequence_order
+        description: 'Optional ordering within a parent (especially useful for micro-jobs
+          that form a sequence inside a mid_level stage).
+
+          '
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        owner: Job
+        domain_of:
+        - Job
+        range: integer
+      iterative:
+        name: iterative
+        description: 'True when this mid-level job can legitimately repeat / loop
+          during a matter (e.g. discovery waves, successive motions, negotiation rounds).
+
+          '
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        owner: Job
+        domain_of:
+        - Job
+        range: boolean
+      id:
+        name: id
+        annotations:
+          primary_key:
+            tag: primary_key
+            value: 'true'
+          required:
+            tag: required
+            value: 'true'
+        description: Canonical, storage-independent identifier.
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        identifier: true
+        owner: Job
+        domain_of:
+        - Identifiable
+        - GraphNode
+        - GraphEdge
+        - Job
+        - DesiredOutcome
+        - InvestmentLane
+        - ProductOutcome
+        - Requirement
+        - Capability
+        range: SemanticId
+        required: true
+        pattern: ^jtbd:JOB-[A-Z0-9-]+$
+      pref_label:
+        name: pref_label
+        description: Human-readable preferred label.
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        owner: Job
+        domain_of:
+        - Identifiable
+        range: string
+      description:
+        name: description
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        owner: Job
+        domain_of:
+        - Identifiable
+        - GraphNode
+        - GraphEdge
+        - Job
+        - DesiredOutcome
+        - InvestmentLane
+        - ProductOutcome
+        - Requirement
+        - Capability
+        range: string
+      status:
+        name: status
+        annotations:
+          required:
+            tag: required
+            value: 'true'
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        owner: Job
+        domain_of:
+        - Identifiable
+        range: LifecycleStatus
+        required: true
+      version:
+        name: version
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        owner: Job
+        domain_of:
+        - Identifiable
+        range: string
+      parent_job_id:
+        name: parent_job_id
+        annotations:
+          original_slot:
+            tag: original_slot
+            value: parent_job
+          foreign_key:
+            tag: foreign_key
+            value: Job.id
+        description: 'Hierarchical parent. A mid_level job points to a top_level job.
+          A micro job points to a mid_level (or occasionally top_level) job.
+
+          '
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        alias: parent_job_id
+        owner: Job
+        domain_of:
+        - Job
+        range: Job
+    class_uri: jtbd:Job
+  DesiredOutcome:
+    name: DesiredOutcome
+    description: Kalbach-formulated desired outcome statement.
+    from_schema: https://example.org/legal-jtbd/unified_relational
+    is_a: GraphNode
+    attributes:
+      statement:
+        name: statement
+        annotations:
+          required:
+            tag: required
+            value: 'true'
+        description: Full Kalbach statement.
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        owner: DesiredOutcome
+        domain_of:
+        - DesiredOutcome
+        range: string
+        required: true
+      direction:
+        name: direction
+        annotations:
+          required:
+            tag: required
+            value: 'true'
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        owner: DesiredOutcome
+        domain_of:
+        - DesiredOutcome
+        range: OutcomeDirection
+        required: true
+      unit_of_measure:
+        name: unit_of_measure
+        annotations:
+          required:
+            tag: required
+            value: 'true'
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        owner: DesiredOutcome
+        domain_of:
+        - DesiredOutcome
+        range: string
+        required: true
+      qualifier:
+        name: qualifier
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        owner: DesiredOutcome
+        domain_of:
+        - DesiredOutcome
+        range: string
+      importance:
+        name: importance
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        owner: DesiredOutcome
+        domain_of:
+        - DesiredOutcome
+        range: integer
+        minimum_value: 1
+        maximum_value: 10
+      satisfaction:
+        name: satisfaction
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        owner: DesiredOutcome
+        domain_of:
+        - DesiredOutcome
+        range: integer
+        minimum_value: 1
+        maximum_value: 10
+      opportunity_score:
+        name: opportunity_score
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        owner: DesiredOutcome
+        domain_of:
+        - DesiredOutcome
+        range: float
+      id:
+        name: id
+        annotations:
+          primary_key:
+            tag: primary_key
+            value: 'true'
+          required:
+            tag: required
+            value: 'true'
+        description: Canonical, storage-independent identifier.
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        identifier: true
+        owner: DesiredOutcome
+        domain_of:
+        - Identifiable
+        - GraphNode
+        - GraphEdge
+        - Job
+        - DesiredOutcome
+        - InvestmentLane
+        - ProductOutcome
+        - Requirement
+        - Capability
+        range: SemanticId
+        required: true
+        pattern: ^jtbd:OUT-[A-Z0-9-]+$
+      pref_label:
+        name: pref_label
+        description: Human-readable preferred label.
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        owner: DesiredOutcome
+        domain_of:
+        - Identifiable
+        range: string
+      description:
+        name: description
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        owner: DesiredOutcome
+        domain_of:
+        - Identifiable
+        - GraphNode
+        - GraphEdge
+        - Job
+        - DesiredOutcome
+        - InvestmentLane
+        - ProductOutcome
+        - Requirement
+        - Capability
+        range: string
+      status:
+        name: status
+        annotations:
+          required:
+            tag: required
+            value: 'true'
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        owner: DesiredOutcome
+        domain_of:
+        - Identifiable
+        range: LifecycleStatus
+        required: true
+      version:
+        name: version
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        owner: DesiredOutcome
+        domain_of:
+        - Identifiable
+        range: string
+      related_job_id:
+        name: related_job_id
+        annotations:
+          original_slot:
+            tag: original_slot
+            value: related_job
+          foreign_key:
+            tag: foreign_key
+            value: Job.id
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        alias: related_job_id
+        owner: DesiredOutcome
+        domain_of:
+        - DesiredOutcome
+        range: Job
+    class_uri: jtbd:DesiredOutcome
+  InvestmentLane:
+    name: InvestmentLane
+    from_schema: https://example.org/legal-jtbd/unified_relational
+    is_a: GraphNode
+    attributes:
+      horizon:
+        name: horizon
+        description: Now / next / later / explore planning horizon.
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        owner: InvestmentLane
+        domain_of:
+        - InvestmentLane
+        range: InvestmentHorizon
+      strategic_weight:
+        name: strategic_weight
+        description: Relative strategic importance of the lane (e.g. 0.0–1.0).
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        owner: InvestmentLane
+        domain_of:
+        - InvestmentLane
+        range: float
+      owner:
+        name: owner
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        owner: InvestmentLane
+        domain_of:
+        - InvestmentLane
+        - Capability
+        range: string
+      id:
+        name: id
+        annotations:
+          primary_key:
+            tag: primary_key
+            value: 'true'
+          required:
+            tag: required
+            value: 'true'
+        description: Canonical, storage-independent identifier.
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        identifier: true
+        owner: InvestmentLane
+        domain_of:
+        - Identifiable
+        - GraphNode
+        - GraphEdge
+        - Job
+        - DesiredOutcome
+        - InvestmentLane
+        - ProductOutcome
+        - Requirement
+        - Capability
+        range: SemanticId
+        required: true
+        pattern: ^inv:LANE-[A-Z0-9-]+$
+      pref_label:
+        name: pref_label
+        description: Human-readable preferred label.
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        owner: InvestmentLane
+        domain_of:
+        - Identifiable
+        range: string
+      description:
+        name: description
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        owner: InvestmentLane
+        domain_of:
+        - Identifiable
+        - GraphNode
+        - GraphEdge
+        - Job
+        - DesiredOutcome
+        - InvestmentLane
+        - ProductOutcome
+        - Requirement
+        - Capability
+        range: string
+      status:
+        name: status
+        annotations:
+          required:
+            tag: required
+            value: 'true'
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        owner: InvestmentLane
+        domain_of:
+        - Identifiable
+        range: LifecycleStatus
+        required: true
+      version:
+        name: version
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        owner: InvestmentLane
+        domain_of:
+        - Identifiable
+        range: string
+    class_uri: jtbd:InvestmentLane
+  ProductOutcome:
+    name: ProductOutcome
+    from_schema: https://example.org/legal-jtbd/unified_relational
+    is_a: GraphNode
+    attributes:
+      target_metric:
+        name: target_metric
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        owner: ProductOutcome
+        domain_of:
+        - ProductOutcome
+        range: string
+      target_value:
+        name: target_value
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        owner: ProductOutcome
+        domain_of:
+        - ProductOutcome
+        range: string
+      current_value:
+        name: current_value
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        owner: ProductOutcome
+        domain_of:
+        - ProductOutcome
+        range: string
+      target_date:
+        name: target_date
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        owner: ProductOutcome
+        domain_of:
+        - ProductOutcome
+        range: date
+      id:
+        name: id
+        annotations:
+          primary_key:
+            tag: primary_key
+            value: 'true'
+          required:
+            tag: required
+            value: 'true'
+        description: Canonical, storage-independent identifier.
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        identifier: true
+        owner: ProductOutcome
+        domain_of:
+        - Identifiable
+        - GraphNode
+        - GraphEdge
+        - Job
+        - DesiredOutcome
+        - InvestmentLane
+        - ProductOutcome
+        - Requirement
+        - Capability
+        range: SemanticId
+        required: true
+        pattern: ^inv:POUT-[A-Z0-9-]+$
+      pref_label:
+        name: pref_label
+        description: Human-readable preferred label.
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        owner: ProductOutcome
+        domain_of:
+        - Identifiable
+        range: string
+      description:
+        name: description
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        owner: ProductOutcome
+        domain_of:
+        - Identifiable
+        - GraphNode
+        - GraphEdge
+        - Job
+        - DesiredOutcome
+        - InvestmentLane
+        - ProductOutcome
+        - Requirement
+        - Capability
+        range: string
+      status:
+        name: status
+        annotations:
+          required:
+            tag: required
+            value: 'true'
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        owner: ProductOutcome
+        domain_of:
+        - Identifiable
+        range: LifecycleStatus
+        required: true
+      version:
+        name: version
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        owner: ProductOutcome
+        domain_of:
+        - Identifiable
+        range: string
+      lane_id:
+        name: lane_id
+        annotations:
+          required:
+            tag: required
+            value: 'true'
+          original_slot:
+            tag: original_slot
+            value: lane
+          foreign_key:
+            tag: foreign_key
+            value: InvestmentLane.id
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        alias: lane_id
+        owner: ProductOutcome
+        domain_of:
+        - ProductOutcome
+        range: InvestmentLane
+        required: true
+    class_uri: jtbd:ProductOutcome
+  Requirement:
+    name: Requirement
+    from_schema: https://example.org/legal-jtbd/unified_relational
+    is_a: GraphNode
+    attributes:
+      requirement_type:
+        name: requirement_type
+        annotations:
+          required:
+            tag: required
+            value: 'true'
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        owner: Requirement
+        domain_of:
+        - Requirement
+        range: RequirementType
+        required: true
+      priority:
+        name: priority
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        owner: Requirement
+        domain_of:
+        - Requirement
+        range: PriorityLevel
+      id:
+        name: id
+        annotations:
+          primary_key:
+            tag: primary_key
+            value: 'true'
+          required:
+            tag: required
+            value: 'true'
+        description: Canonical, storage-independent identifier.
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        identifier: true
+        owner: Requirement
+        domain_of:
+        - Identifiable
+        - GraphNode
+        - GraphEdge
+        - Job
+        - DesiredOutcome
+        - InvestmentLane
+        - ProductOutcome
+        - Requirement
+        - Capability
+        range: SemanticId
+        required: true
+        pattern: ^req:REQ-[A-Z0-9-]+$
+      pref_label:
+        name: pref_label
+        description: Human-readable preferred label.
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        owner: Requirement
+        domain_of:
+        - Identifiable
+        range: string
+      description:
+        name: description
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        owner: Requirement
+        domain_of:
+        - Identifiable
+        - GraphNode
+        - GraphEdge
+        - Job
+        - DesiredOutcome
+        - InvestmentLane
+        - ProductOutcome
+        - Requirement
+        - Capability
+        range: string
+      status:
+        name: status
+        annotations:
+          required:
+            tag: required
+            value: 'true'
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        owner: Requirement
+        domain_of:
+        - Identifiable
+        range: LifecycleStatus
+        required: true
+      version:
+        name: version
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        owner: Requirement
+        domain_of:
+        - Identifiable
+        range: string
+    class_uri: jtbd:Requirement
+  Capability:
+    name: Capability
+    from_schema: https://example.org/legal-jtbd/unified_relational
+    is_a: GraphNode
+    attributes:
+      capability_type:
+        name: capability_type
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        owner: Capability
+        domain_of:
+        - Capability
+        range: CapabilityType
+      implementation_status:
+        name: implementation_status
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        owner: Capability
+        domain_of:
+        - Capability
+        range: ImplementationStatus
+      owner:
+        name: owner
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        owner: Capability
+        domain_of:
+        - InvestmentLane
+        - Capability
+        range: string
+      id:
+        name: id
+        annotations:
+          primary_key:
+            tag: primary_key
+            value: 'true'
+          required:
+            tag: required
+            value: 'true'
+        description: Canonical, storage-independent identifier.
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        identifier: true
+        owner: Capability
+        domain_of:
+        - Identifiable
+        - GraphNode
+        - GraphEdge
+        - Job
+        - DesiredOutcome
+        - InvestmentLane
+        - ProductOutcome
+        - Requirement
+        - Capability
+        range: SemanticId
+        required: true
+        pattern: ^req:CAP-[A-Z0-9-]+$
+      pref_label:
+        name: pref_label
+        description: Human-readable preferred label.
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        owner: Capability
+        domain_of:
+        - Identifiable
+        range: string
+      description:
+        name: description
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        owner: Capability
+        domain_of:
+        - Identifiable
+        - GraphNode
+        - GraphEdge
+        - Job
+        - DesiredOutcome
+        - InvestmentLane
+        - ProductOutcome
+        - Requirement
+        - Capability
+        range: string
+      status:
+        name: status
+        annotations:
+          required:
+            tag: required
+            value: 'true'
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        owner: Capability
+        domain_of:
+        - Identifiable
+        range: LifecycleStatus
+        required: true
+      version:
+        name: version
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        owner: Capability
+        domain_of:
+        - Identifiable
+        range: string
+    class_uri: jtbd:Capability
+  Job_sali_tags:
+    name: Job_sali_tags
+    annotations:
+      linkml:derived_from:
+        tag: linkml:derived_from
+        value: Job
+      dcterms:conformsTo:
+        tag: dcterms:conformsTo
+        value: linkml:JoinTable
+    comments:
+    - Linking class generated from Job.sali_tags
+    from_schema: https://example.org/legal-jtbd/unified_relational
+    attributes:
+      Job_id:
+        name: Job_id
+        annotations:
+          backref:
+            tag: backref
+            value: 'true'
+          rdfs:subPropertyOf:
+            tag: rdfs:subPropertyOf
+            value: rdf:subject
+          primary_key:
+            tag: primary_key
+            value: 'true'
+          foreign_key:
+            tag: foreign_key
+            value: Job.id
+        description: Autocreated FK slot
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        slot_uri: rdf:subject
+        domain_of:
+        - Job_sali_tags
+        - Job_desired_outcomes
+        - Job_child_jobs
+        - Job_related_jobs
+        range: Job
+      sali_tags:
+        name: sali_tags
+        annotations:
+          primary_key:
+            tag: primary_key
+            value: 'true'
+        description: External SALI LMSS concept CURIEs (not in-schema classes). Stored
+          as TEXT in SQL.
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        slot_uri: rdf:object
+        owner: Job
+        domain_of:
+        - Job
+        - Job_sali_tags
+        range: uriorcurie
+        multivalued: false
+        inlined: true
+    class_uri: rdf:Statement
+  Job_desired_outcomes:
+    name: Job_desired_outcomes
+    annotations:
+      linkml:derived_from:
+        tag: linkml:derived_from
+        value: Job
+      dcterms:conformsTo:
+        tag: dcterms:conformsTo
+        value: linkml:JoinTable
+    comments:
+    - Linking class generated from Job.desired_outcomes
+    from_schema: https://example.org/legal-jtbd/unified_relational
+    attributes:
+      Job_id:
+        name: Job_id
+        annotations:
+          backref:
+            tag: backref
+            value: 'true'
+          rdfs:subPropertyOf:
+            tag: rdfs:subPropertyOf
+            value: rdf:subject
+          primary_key:
+            tag: primary_key
+            value: 'true'
+          foreign_key:
+            tag: foreign_key
+            value: Job.id
+        description: Autocreated FK slot
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        slot_uri: rdf:subject
+        domain_of:
+        - Job_sali_tags
+        - Job_desired_outcomes
+        - Job_child_jobs
+        - Job_related_jobs
+        range: Job
+      desired_outcomes_id:
+        name: desired_outcomes_id
+        annotations:
+          forwardref:
+            tag: forwardref
+            value: 'true'
+          primary_key:
+            tag: primary_key
+            value: 'true'
+          foreign_key:
+            tag: foreign_key
+            value: DesiredOutcome.id
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        slot_uri: rdf:object
+        alias: desired_outcomes_id
+        owner: Job
+        domain_of:
+        - Job
+        - Job_desired_outcomes
+        range: DesiredOutcome
+        multivalued: false
+        inlined: true
+    class_uri: rdf:Statement
+  Job_child_jobs:
+    name: Job_child_jobs
+    annotations:
+      linkml:derived_from:
+        tag: linkml:derived_from
+        value: Job
+      dcterms:conformsTo:
+        tag: dcterms:conformsTo
+        value: linkml:JoinTable
+    comments:
+    - Linking class generated from Job.child_jobs
+    from_schema: https://example.org/legal-jtbd/unified_relational
+    attributes:
+      Job_id:
+        name: Job_id
+        annotations:
+          backref:
+            tag: backref
+            value: 'true'
+          rdfs:subPropertyOf:
+            tag: rdfs:subPropertyOf
+            value: rdf:subject
+          primary_key:
+            tag: primary_key
+            value: 'true'
+          foreign_key:
+            tag: foreign_key
+            value: Job.id
+        description: Autocreated FK slot
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        slot_uri: rdf:subject
+        domain_of:
+        - Job_sali_tags
+        - Job_desired_outcomes
+        - Job_child_jobs
+        - Job_related_jobs
+        range: Job
+      child_jobs_id:
+        name: child_jobs_id
+        annotations:
+          forwardref:
+            tag: forwardref
+            value: 'true'
+          primary_key:
+            tag: primary_key
+            value: 'true'
+          foreign_key:
+            tag: foreign_key
+            value: Job.id
+        description: 'Convenience inverse of parent_job. Especially useful for listing
+          the micro-jobs that belong to a mid_level stage.
+
+          '
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        slot_uri: rdf:object
+        alias: child_jobs_id
+        owner: Job
+        domain_of:
+        - Job
+        - Job_child_jobs
+        range: Job
+        multivalued: false
+        inlined: true
+    class_uri: rdf:Statement
+  Job_related_jobs:
+    name: Job_related_jobs
+    annotations:
+      linkml:derived_from:
+        tag: linkml:derived_from
+        value: Job
+      dcterms:conformsTo:
+        tag: dcterms:conformsTo
+        value: linkml:JoinTable
+    comments:
+    - Linking class generated from Job.related_jobs
+    from_schema: https://example.org/legal-jtbd/unified_relational
+    attributes:
+      Job_id:
+        name: Job_id
+        annotations:
+          backref:
+            tag: backref
+            value: 'true'
+          rdfs:subPropertyOf:
+            tag: rdfs:subPropertyOf
+            value: rdf:subject
+          primary_key:
+            tag: primary_key
+            value: 'true'
+          foreign_key:
+            tag: foreign_key
+            value: Job.id
+        description: Autocreated FK slot
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        slot_uri: rdf:subject
+        domain_of:
+        - Job_sali_tags
+        - Job_desired_outcomes
+        - Job_child_jobs
+        - Job_related_jobs
+        range: Job
+      related_jobs_id:
+        name: related_jobs_id
+        annotations:
+          forwardref:
+            tag: forwardref
+            value: 'true'
+          primary_key:
+            tag: primary_key
+            value: 'true'
+          foreign_key:
+            tag: foreign_key
+            value: Job.id
+        description: Lateral (non-hierarchical) relationships between jobs.
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        slot_uri: rdf:object
+        alias: related_jobs_id
+        owner: Job
+        domain_of:
+        - Job
+        - Job_related_jobs
+        range: Job
+        multivalued: false
+        inlined: true
+    class_uri: rdf:Statement
+  InvestmentLane_product_outcomes:
+    name: InvestmentLane_product_outcomes
+    annotations:
+      linkml:derived_from:
+        tag: linkml:derived_from
+        value: InvestmentLane
+      dcterms:conformsTo:
+        tag: dcterms:conformsTo
+        value: linkml:JoinTable
+    comments:
+    - Linking class generated from InvestmentLane.product_outcomes
+    from_schema: https://example.org/legal-jtbd/unified_relational
+    attributes:
+      InvestmentLane_id:
+        name: InvestmentLane_id
+        annotations:
+          backref:
+            tag: backref
+            value: 'true'
+          rdfs:subPropertyOf:
+            tag: rdfs:subPropertyOf
+            value: rdf:subject
+          primary_key:
+            tag: primary_key
+            value: 'true'
+          foreign_key:
+            tag: foreign_key
+            value: InvestmentLane.id
+        description: Autocreated FK slot
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        slot_uri: rdf:subject
+        domain_of:
+        - InvestmentLane_product_outcomes
+        range: InvestmentLane
+      product_outcomes_id:
+        name: product_outcomes_id
+        annotations:
+          forwardref:
+            tag: forwardref
+            value: 'true'
+          primary_key:
+            tag: primary_key
+            value: 'true'
+          foreign_key:
+            tag: foreign_key
+            value: ProductOutcome.id
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        slot_uri: rdf:object
+        alias: product_outcomes_id
+        owner: InvestmentLane
+        domain_of:
+        - InvestmentLane
+        - InvestmentLane_product_outcomes
+        range: ProductOutcome
+        multivalued: false
+        inlined: true
+    class_uri: rdf:Statement
+  ProductOutcome_informed_by_outcomes:
+    name: ProductOutcome_informed_by_outcomes
+    annotations:
+      linkml:derived_from:
+        tag: linkml:derived_from
+        value: ProductOutcome
+      dcterms:conformsTo:
+        tag: dcterms:conformsTo
+        value: linkml:JoinTable
+    comments:
+    - Linking class generated from ProductOutcome.informed_by_outcomes
+    from_schema: https://example.org/legal-jtbd/unified_relational
+    attributes:
+      ProductOutcome_id:
+        name: ProductOutcome_id
+        annotations:
+          backref:
+            tag: backref
+            value: 'true'
+          rdfs:subPropertyOf:
+            tag: rdfs:subPropertyOf
+            value: rdf:subject
+          primary_key:
+            tag: primary_key
+            value: 'true'
+          foreign_key:
+            tag: foreign_key
+            value: ProductOutcome.id
+        description: Autocreated FK slot
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        slot_uri: rdf:subject
+        domain_of:
+        - ProductOutcome_informed_by_outcomes
+        range: ProductOutcome
+      informed_by_outcomes_id:
+        name: informed_by_outcomes_id
+        annotations:
+          forwardref:
+            tag: forwardref
+            value: 'true'
+          primary_key:
+            tag: primary_key
+            value: 'true'
+          foreign_key:
+            tag: foreign_key
+            value: DesiredOutcome.id
+        description: Kalbach desired outcomes this product outcome is designed to
+          improve.
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        slot_uri: rdf:object
+        alias: informed_by_outcomes_id
+        owner: ProductOutcome
+        domain_of:
+        - ProductOutcome
+        - ProductOutcome_informed_by_outcomes
+        range: DesiredOutcome
+        multivalued: false
+        inlined: true
+    class_uri: rdf:Statement
+  Requirement_realizes_product_outcomes:
+    name: Requirement_realizes_product_outcomes
+    annotations:
+      linkml:derived_from:
+        tag: linkml:derived_from
+        value: Requirement
+      dcterms:conformsTo:
+        tag: dcterms:conformsTo
+        value: linkml:JoinTable
+    comments:
+    - Linking class generated from Requirement.realizes_product_outcomes
+    from_schema: https://example.org/legal-jtbd/unified_relational
+    attributes:
+      Requirement_id:
+        name: Requirement_id
+        annotations:
+          backref:
+            tag: backref
+            value: 'true'
+          rdfs:subPropertyOf:
+            tag: rdfs:subPropertyOf
+            value: rdf:subject
+          primary_key:
+            tag: primary_key
+            value: 'true'
+          foreign_key:
+            tag: foreign_key
+            value: Requirement.id
+        description: Autocreated FK slot
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        slot_uri: rdf:subject
+        domain_of:
+        - Requirement_realizes_product_outcomes
+        - Requirement_satisfied_by_capabilities
+        - Requirement_acceptance_criteria
+        range: Requirement
+      realizes_product_outcomes_id:
+        name: realizes_product_outcomes_id
+        annotations:
+          forwardref:
+            tag: forwardref
+            value: 'true'
+          primary_key:
+            tag: primary_key
+            value: 'true'
+          foreign_key:
+            tag: foreign_key
+            value: ProductOutcome.id
+        description: Product outcomes this requirement helps realize.
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        slot_uri: rdf:object
+        alias: realizes_product_outcomes_id
+        owner: Requirement
+        domain_of:
+        - Requirement
+        - Requirement_realizes_product_outcomes
+        range: ProductOutcome
+        multivalued: false
+        inlined: true
+    class_uri: rdf:Statement
+  Requirement_satisfied_by_capabilities:
+    name: Requirement_satisfied_by_capabilities
+    annotations:
+      linkml:derived_from:
+        tag: linkml:derived_from
+        value: Requirement
+      dcterms:conformsTo:
+        tag: dcterms:conformsTo
+        value: linkml:JoinTable
+    comments:
+    - Linking class generated from Requirement.satisfied_by_capabilities
+    from_schema: https://example.org/legal-jtbd/unified_relational
+    attributes:
+      Requirement_id:
+        name: Requirement_id
+        annotations:
+          backref:
+            tag: backref
+            value: 'true'
+          rdfs:subPropertyOf:
+            tag: rdfs:subPropertyOf
+            value: rdf:subject
+          primary_key:
+            tag: primary_key
+            value: 'true'
+          foreign_key:
+            tag: foreign_key
+            value: Requirement.id
+        description: Autocreated FK slot
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        slot_uri: rdf:subject
+        domain_of:
+        - Requirement_realizes_product_outcomes
+        - Requirement_satisfied_by_capabilities
+        - Requirement_acceptance_criteria
+        range: Requirement
+      satisfied_by_capabilities_id:
+        name: satisfied_by_capabilities_id
+        annotations:
+          forwardref:
+            tag: forwardref
+            value: 'true'
+          primary_key:
+            tag: primary_key
+            value: 'true'
+          foreign_key:
+            tag: foreign_key
+            value: Capability.id
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        slot_uri: rdf:object
+        alias: satisfied_by_capabilities_id
+        owner: Requirement
+        domain_of:
+        - Requirement
+        - Requirement_satisfied_by_capabilities
+        range: Capability
+        multivalued: false
+        inlined: true
+    class_uri: rdf:Statement
+  Requirement_acceptance_criteria:
+    name: Requirement_acceptance_criteria
+    annotations:
+      linkml:derived_from:
+        tag: linkml:derived_from
+        value: Requirement
+      dcterms:conformsTo:
+        tag: dcterms:conformsTo
+        value: linkml:JoinTable
+    comments:
+    - Linking class generated from Requirement.acceptance_criteria
+    from_schema: https://example.org/legal-jtbd/unified_relational
+    attributes:
+      Requirement_id:
+        name: Requirement_id
+        annotations:
+          backref:
+            tag: backref
+            value: 'true'
+          rdfs:subPropertyOf:
+            tag: rdfs:subPropertyOf
+            value: rdf:subject
+          primary_key:
+            tag: primary_key
+            value: 'true'
+          foreign_key:
+            tag: foreign_key
+            value: Requirement.id
+        description: Autocreated FK slot
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        slot_uri: rdf:subject
+        domain_of:
+        - Requirement_realizes_product_outcomes
+        - Requirement_satisfied_by_capabilities
+        - Requirement_acceptance_criteria
+        range: Requirement
+      acceptance_criteria:
+        name: acceptance_criteria
+        annotations:
+          primary_key:
+            tag: primary_key
+            value: 'true'
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        slot_uri: rdf:object
+        owner: Requirement
+        domain_of:
+        - Requirement
+        - Requirement_acceptance_criteria
+        range: string
+        multivalued: false
+        inlined: true
+    class_uri: rdf:Statement
+  Capability_satisfies_requirements:
+    name: Capability_satisfies_requirements
+    annotations:
+      linkml:derived_from:
+        tag: linkml:derived_from
+        value: Capability
+      dcterms:conformsTo:
+        tag: dcterms:conformsTo
+        value: linkml:JoinTable
+    comments:
+    - Linking class generated from Capability.satisfies_requirements
+    from_schema: https://example.org/legal-jtbd/unified_relational
+    attributes:
+      Capability_id:
+        name: Capability_id
+        annotations:
+          backref:
+            tag: backref
+            value: 'true'
+          rdfs:subPropertyOf:
+            tag: rdfs:subPropertyOf
+            value: rdf:subject
+          primary_key:
+            tag: primary_key
+            value: 'true'
+          foreign_key:
+            tag: foreign_key
+            value: Capability.id
+        description: Autocreated FK slot
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        slot_uri: rdf:subject
+        domain_of:
+        - Capability_satisfies_requirements
+        - Capability_supports_jobs
+        - Capability_supports_desired_outcomes
+        range: Capability
+      satisfies_requirements_id:
+        name: satisfies_requirements_id
+        annotations:
+          forwardref:
+            tag: forwardref
+            value: 'true'
+          primary_key:
+            tag: primary_key
+            value: 'true'
+          foreign_key:
+            tag: foreign_key
+            value: Requirement.id
+        description: Requirements this capability satisfies.
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        slot_uri: rdf:object
+        alias: satisfies_requirements_id
+        owner: Capability
+        domain_of:
+        - Capability
+        - Capability_satisfies_requirements
+        range: Requirement
+        multivalued: false
+        inlined: true
+    class_uri: rdf:Statement
+  Capability_supports_jobs:
+    name: Capability_supports_jobs
+    annotations:
+      linkml:derived_from:
+        tag: linkml:derived_from
+        value: Capability
+      dcterms:conformsTo:
+        tag: dcterms:conformsTo
+        value: linkml:JoinTable
+    comments:
+    - Linking class generated from Capability.supports_jobs
+    from_schema: https://example.org/legal-jtbd/unified_relational
+    attributes:
+      Capability_id:
+        name: Capability_id
+        annotations:
+          backref:
+            tag: backref
+            value: 'true'
+          rdfs:subPropertyOf:
+            tag: rdfs:subPropertyOf
+            value: rdf:subject
+          primary_key:
+            tag: primary_key
+            value: 'true'
+          foreign_key:
+            tag: foreign_key
+            value: Capability.id
+        description: Autocreated FK slot
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        slot_uri: rdf:subject
+        domain_of:
+        - Capability_satisfies_requirements
+        - Capability_supports_jobs
+        - Capability_supports_desired_outcomes
+        range: Capability
+      supports_jobs_id:
+        name: supports_jobs_id
+        annotations:
+          forwardref:
+            tag: forwardref
+            value: 'true'
+          primary_key:
+            tag: primary_key
+            value: 'true'
+          foreign_key:
+            tag: foreign_key
+            value: Job.id
+        description: Jobs (any level) this capability supports.
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        slot_uri: rdf:object
+        alias: supports_jobs_id
+        owner: Capability
+        domain_of:
+        - Capability
+        - Capability_supports_jobs
+        range: Job
+        multivalued: false
+        inlined: true
+    class_uri: rdf:Statement
+  Capability_supports_desired_outcomes:
+    name: Capability_supports_desired_outcomes
+    annotations:
+      linkml:derived_from:
+        tag: linkml:derived_from
+        value: Capability
+      dcterms:conformsTo:
+        tag: dcterms:conformsTo
+        value: linkml:JoinTable
+    comments:
+    - Linking class generated from Capability.supports_desired_outcomes
+    from_schema: https://example.org/legal-jtbd/unified_relational
+    attributes:
+      Capability_id:
+        name: Capability_id
+        annotations:
+          backref:
+            tag: backref
+            value: 'true'
+          rdfs:subPropertyOf:
+            tag: rdfs:subPropertyOf
+            value: rdf:subject
+          primary_key:
+            tag: primary_key
+            value: 'true'
+          foreign_key:
+            tag: foreign_key
+            value: Capability.id
+        description: Autocreated FK slot
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        slot_uri: rdf:subject
+        domain_of:
+        - Capability_satisfies_requirements
+        - Capability_supports_jobs
+        - Capability_supports_desired_outcomes
+        range: Capability
+      supports_desired_outcomes_id:
+        name: supports_desired_outcomes_id
+        annotations:
+          forwardref:
+            tag: forwardref
+            value: 'true'
+          primary_key:
+            tag: primary_key
+            value: 'true'
+          foreign_key:
+            tag: foreign_key
+            value: DesiredOutcome.id
+        description: Desired outcomes this capability supports.
+        from_schema: https://example.org/legal-jtbd/unified_relational
+        slot_uri: rdf:object
+        alias: supports_desired_outcomes_id
+        owner: Capability
+        domain_of:
+        - Capability
+        - Capability_supports_desired_outcomes
+        range: DesiredOutcome
+        multivalued: false
+        inlined: true
+    class_uri: rdf:Statement
+source_file: /home/workdir/artifacts/jtbd-models/unified_inline.yaml

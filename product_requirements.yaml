@@ -1,40 +1,114 @@
 id: https://example.org/legal-jtbd/product-requirements
 name: LegalJTBDProductRequirements
+title: Product Requirements and Capabilities
 version: 0.4.0
+description: 'Decomposition from Product Outcomes into Requirements and reusable Capabilities. Capabilities
+  can link all the way back to Jobs (including micro-jobs) and Desired Outcomes.
+
+  '
 prefixes:
+  linkml: https://w3id.org/linkml/
   req: https://example.org/legal-jtbd/product-requirements/
+  gf: https://example.org/legal-jtbd/graph-foundation/
   inv: https://example.org/legal-jtbd/investments/
   jtbd: https://example.org/legal-jtbd/jobs/
-  gf: https://example.org/legal-jtbd/graph-foundation/
 default_prefix: req
 imports:
-  - linkml:types
-  - gf:graph_foundation
+- linkml:types
+- gf:graph_foundation
+- jtbd:jobs
+- inv:investments
 classes:
   Requirement:
     is_a: GraphNode
-    slots: [requirement_type, realizes_product_outcomes, satisfied_by_capabilities, priority, acceptance_criteria]
+    annotations:
+      graph_role: node
+    slots:
+    - requirement_type
+    - realizes_product_outcomes
+    - satisfied_by_capabilities
+    - priority
+    - acceptance_criteria
+    slot_usage:
+      id:
+        pattern: ^req:REQ-[A-Z0-9-]+$
+      requirement_type:
+        required: true
   Capability:
     is_a: GraphNode
-    slots: [capability_type, satisfies_requirements, supports_jobs, supports_desired_outcomes, implementation_status, owner]
+    annotations:
+      graph_role: node
+    slots:
+    - capability_type
+    - satisfies_requirements
+    - supports_jobs
+    - supports_desired_outcomes
+    - implementation_status
+    - owner
+    slot_usage:
+      id:
+        pattern: ^req:CAP-[A-Z0-9-]+$
 slots:
-  requirement_type: {range: RequirementType}
-  realizes_product_outcomes: {range: ProductOutcome, multivalued: true}
-  satisfied_by_capabilities: {range: Capability, multivalued: true}
-  priority: {range: PriorityLevel}
-  acceptance_criteria: {range: string, multivalued: true}
-  capability_type: {range: CapabilityType}
-  satisfies_requirements: {range: Requirement, multivalued: true}
-  supports_jobs: {range: Job, multivalued: true}
-  supports_desired_outcomes: {range: DesiredOutcome, multivalued: true}
-  implementation_status: {range: ImplementationStatus}
-  owner: {range: string}
+  requirement_type:
+    range: RequirementType
+  realizes_product_outcomes:
+    range: ProductOutcome
+    multivalued: true
+    description: Product outcomes this requirement helps realize.
+  satisfied_by_capabilities:
+    range: Capability
+    multivalued: true
+    annotations:
+      graph_role: edge
+  priority:
+    range: PriorityLevel
+  acceptance_criteria:
+    range: string
+    multivalued: true
+  capability_type:
+    range: CapabilityType
+  satisfies_requirements:
+    range: Requirement
+    multivalued: true
+    description: Requirements this capability satisfies.
+  supports_jobs:
+    range: Job
+    multivalued: true
+    description: Jobs (any level) this capability supports.
+  supports_desired_outcomes:
+    range: DesiredOutcome
+    multivalued: true
+    description: Desired outcomes this capability supports.
+  implementation_status:
+    range: ImplementationStatus
+  owner:
+    range: string
 enums:
   RequirementType:
-    permissible_values: {functional: {}, non_functional: {}, constraint: {}, business_rule: {}, data: {}, interface: {}}
+    permissible_values:
+      functional: null
+      non_functional: null
+      constraint: null
+      business_rule: null
+      data: null
+      interface: null
   CapabilityType:
-    permissible_values: {core: {}, supporting: {}, enabling: {}, partner: {}, commodity: {}}
+    permissible_values:
+      core: null
+      supporting: null
+      enabling: null
+      partner: null
+      commodity: null
   PriorityLevel:
-    permissible_values: {must: {}, should: {}, could: {}, wont: {}}
+    permissible_values:
+      must: null
+      should: null
+      could: null
+      wont: null
   ImplementationStatus:
-    permissible_values: {idea: {}, planned: {}, in_progress: {}, delivered: {}, deprecated: {}}
+    permissible_values:
+      idea: null
+      planned: null
+      in_progress: null
+      delivered: null
+      deprecated: null

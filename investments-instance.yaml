@@ -1,0 +1,133 @@
+investment_lanes:
+- id: inv:LANE-EFFICIENCY
+  pref_label: Efficiency & Cost
+  description: 'Reduce time, effort, or spend required to complete litigation jobs.
+
+    '
+  strategic_weight: 0.3
+  owner: Product Strategy
+  status: active
+  version: '1.0'
+  product_outcomes:
+  - inv:POUT-LOWER-DISCOVERY-COST
+  - inv:POUT-FASTER-CYCLE-TIME
+- id: inv:LANE-RISK-QUALITY
+  pref_label: Risk & Quality
+  description: 'Reduce adverse outcomes, errors, sanctions risk, and improve substantive quality.
+
+    '
+  strategic_weight: 0.25
+  owner: Product Strategy
+  status: active
+  version: '1.0'
+  product_outcomes:
+  - inv:POUT-REDUCE-SANCTIONS
+  - inv:POUT-IMPROVE-OUTCOME-PREDICTABILITY
+- id: inv:LANE-CLIENT-EXPERIENCE
+  pref_label: Client Experience & Trust
+  description: 'Make the litigation process clearer, more predictable, and less stressful for clients.
+
+    '
+  strategic_weight: 0.2
+  owner: Client Success
+  status: active
+  version: '1.0'
+  product_outcomes:
+  - inv:POUT-IMPROVE-STATUS-VISIBILITY
+- id: inv:LANE-KNOWLEDGE-ANALYTICS
+  pref_label: Knowledge & Analytics
+  description: 'Turn matter data into reusable insight and better prediction.
+
+    '
+  strategic_weight: 0.15
+  owner: Data & Analytics
+  status: active
+  version: '1.0'
+  product_outcomes:
+  - inv:POUT-BETTER-PORTFOLIO-INSIGHT
+- id: inv:LANE-COMPLIANCE
+  pref_label: Compliance & Governance
+  description: 'Meet ethical, court, and regulatory obligations cleanly and auditably.
+
+    '
+  strategic_weight: 0.1
+  owner: Risk & Compliance
+  status: active
+  version: '1.0'
+product_outcomes:
+- id: inv:POUT-LOWER-DISCOVERY-COST
+  pref_label: Lower cost per discovery stage
+  description: Reduce average spend on collection, review, and production.
+  lane: inv:LANE-EFFICIENCY
+  informed_by_outcomes:
+  - jtbd:OUT-T3-MIN-DISCOVERY-COST
+  - jtbd:OUT-T1-MIN-TOTAL-COST
+  target_metric: Average discovery cost per matter
+  target_value: -25% vs baseline
+  current_value: baseline
+  target_date: 2027-06-30
+  status: active
+  version: '1.0'
+- id: inv:POUT-FASTER-CYCLE-TIME
+  pref_label: Faster overall matter cycle time
+  description: Reduce elapsed time from matter open to resolution.
+  lane: inv:LANE-EFFICIENCY
+  informed_by_outcomes:
+  - jtbd:OUT-T1-MIN-TOTAL-COST
+  - jtbd:OUT-T1-MIN-TIME-TO-RESOLVE
+  target_metric: Median days to resolution
+  target_value: -15%
+  current_value: baseline
+  target_date: 2027-12-31
+  status: active
+  version: '1.0'
+- id: inv:POUT-REDUCE-SANCTIONS
+  pref_label: Reduce discovery sanctions and privilege incidents
+  description: Lower the incidence of sanctions motions and privilege waivers.
+  lane: inv:LANE-RISK-QUALITY
+  informed_by_outcomes:
+  - jtbd:OUT-T3-MIN-SANCTIONS-RISK
+  target_metric: Sanctions / privilege incidents per 100 matters
+  target_value: < 1
+  current_value: '2.4'
+  target_date: 2027-03-31
+  status: active
+  version: '1.0'
+- id: inv:POUT-IMPROVE-OUTCOME-PREDICTABILITY
+  pref_label: Improve predictability of case outcomes
+  description: Increase accuracy of early case assessment predictions.
+  lane: inv:LANE-RISK-QUALITY
+  informed_by_outcomes:
+  - jtbd:OUT-T1-MAX-FAVORABLE
+  - jtbd:OUT-T2-M1-MIN-UNCERTAINTY-MERITS
+  target_metric: Prediction accuracy (early assessment vs final)
+  target_value: '>= 70%'
+  current_value: 52%
+  target_date: 2027-09-30
+  status: active
+  version: '1.0'
+- id: inv:POUT-IMPROVE-STATUS-VISIBILITY
+  pref_label: Improve real-time status visibility for clients
+  description: Give clients clear, current understanding of matter status and next steps.
+  lane: inv:LANE-CLIENT-EXPERIENCE
+  informed_by_outcomes:
+  - jtbd:OUT-T1-MIN-TIME-TO-RESOLVE
+  target_metric: Client status satisfaction score
+  target_value: '>= 8.5 / 10'
+  current_value: '6.8'
+  target_date: 2027-06-30
+  status: active
+  version: '1.0'
+- id: inv:POUT-BETTER-PORTFOLIO-INSIGHT
+  pref_label: Better portfolio-level insight and benchmarking
+  description: Enable consistent cross-matter analytics using standard tags.
+  lane: inv:LANE-KNOWLEDGE-ANALYTICS
+  informed_by_outcomes:
+  - jtbd:OUT-T1-MIN-TOTAL-COST
+  - jtbd:OUT-T1-MAX-FAVORABLE
+  target_metric: '% of matters with complete SALI-style tagging'
+  target_value: '>= 90%'
+  current_value: 35%
+  target_date: 2027-12-31
+  status: active
+  version: '1.0'

@@ -1,0 +1,24 @@
+id: https://example.org/legal-jtbd/unified
+name: LegalJTBDUnified
+title: Unified JTBD Schema (Jobs + Investments + Requirements)
+version: 0.3.0
+description: >
+  Merge of graph_foundation, jobs, investments, and product_requirements
+  for relational DDL generation.
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  gf: https://example.org/legal-jtbd/graph-foundation/
+  jtbd: https://example.org/legal-jtbd/jobs/
+  inv: https://example.org/legal-jtbd/investments/
+  req: https://example.org/legal-jtbd/product-requirements/
+  unified: https://example.org/legal-jtbd/unified/
+
+default_prefix: unified
+
+imports:
+  - linkml:types
+  - graph_foundation
+  - jobs
+  - investments
+  - product_requirements

@@ -1,0 +1,217 @@
+requirements:
+- id: req:REQ-EDISC-COST-CONTROL
+  pref_label: Support cost-aware discovery workflows
+  description: 'The system shall allow teams to set budgets, track spend, and receive alerts when discovery activities approach
+    or exceed thresholds.
+
+    '
+  requirement_type: functional
+  realizes_product_outcomes:
+  - inv:POUT-LOWER-DISCOVERY-COST
+  priority: must
+  acceptance_criteria:
+  - Users can define per-matter or per-stage discovery budgets
+  - Real-time or daily spend visibility is available
+  - Configurable alerts fire at 50%, 80%, and 100% of budget
+  status: active
+  version: '1.0'
+  satisfied_by_capabilities:
+  - req:CAP-BUDGET-TRACKING
+  - req:CAP-DISCOVERY-WORKFLOW
+- id: req:REQ-PRIVILEGE-PROTECTION
+  pref_label: Protect privileged material throughout discovery
+  description: 'The system shall support identification, logging, and claw-back of privileged documents with audit trail.
+
+    '
+  requirement_type: functional
+  realizes_product_outcomes:
+  - inv:POUT-REDUCE-SANCTIONS
+  priority: must
+  acceptance_criteria:
+  - Privilege log can be generated and maintained
+  - Claw-back workflow is supported
+  - Full audit trail of privilege decisions exists
+  status: active
+  version: '1.0'
+  satisfied_by_capabilities:
+  - req:CAP-PRIVILEGE-LOG
+  - req:CAP-DISCOVERY-WORKFLOW
+- id: req:REQ-EARLY-CASE-ASSESSMENT
+  pref_label: Support structured early case assessment
+  description: 'The system shall guide users through a structured assessment of merits, exposure, and early resolution options.
+
+    '
+  requirement_type: functional
+  realizes_product_outcomes:
+  - inv:POUT-IMPROVE-OUTCOME-PREDICTABILITY
+  - inv:POUT-FASTER-CYCLE-TIME
+  priority: should
+  acceptance_criteria:
+  - Standardized assessment questionnaire is available
+  - Assessment results are stored and comparable across matters
+  - Links to similar historical matters are suggested
+  status: active
+  version: '1.0'
+  satisfied_by_capabilities:
+  - req:CAP-CASE-ASSESSMENT
+  - req:CAP-ANALYTICS-ENGINE
+- id: req:REQ-CLIENT-STATUS-DASHBOARD
+  pref_label: Provide client-facing matter status dashboard
+  description: 'Clients shall have a secure view of current phase, key milestones, open tasks, and upcoming dates.
+
+    '
+  requirement_type: functional
+  realizes_product_outcomes:
+  - inv:POUT-IMPROVE-STATUS-VISIBILITY
+  priority: should
+  acceptance_criteria:
+  - Dashboard shows current phase and next milestone
+  - Open action items and owners are visible
+  - Data is near real-time (max 24h lag)
+  status: active
+  version: '1.0'
+  satisfied_by_capabilities:
+  - req:CAP-STATUS-DASHBOARD
+- id: req:REQ-SALI-TAGGING
+  pref_label: Support consistent SALI LMSS tagging of matters
+  description: 'Matters shall be taggable with SALI-compatible codes for area of law, phase, services, and other attributes
+    to enable analytics.
+
+    '
+  requirement_type: data
+  realizes_product_outcomes:
+  - inv:POUT-BETTER-PORTFOLIO-INSIGHT
+  priority: must
+  acceptance_criteria:
+  - Users can apply and edit SALI-style tags
+  - Tags are queryable and exportable
+  - Tagging completeness is measurable
+  status: active
+  version: '1.0'
+  satisfied_by_capabilities:
+  - req:CAP-TAGGING-SERVICE
+  - req:CAP-ANALYTICS-ENGINE
+capabilities:
+- id: req:CAP-BUDGET-TRACKING
+  pref_label: Budget & Spend Tracking
+  description: Ability to define budgets and track actual spend against them.
+  capability_type: core
+  satisfies_requirements:
+  - req:REQ-EDISC-COST-CONTROL
+  supports_jobs:
+  - jtbd:JOB-T6-M2-BUDGET
+  - jtbd:JOB-T6-GOVERN
+  - jtbd:JOB-T3-EVIDENCE
+  supports_desired_outcomes:
+  - jtbd:OUT-T6-MIN-BUDGET-OVERRUN
+  - jtbd:OUT-T3-MIN-DISCOVERY-COST
+  - jtbd:OUT-T1-MIN-TOTAL-COST
+  implementation_status: planned
+  owner: Platform Team
+  status: active
+  version: '1.0'
+- id: req:CAP-PRIVILEGE-LOG
+  pref_label: Privilege Log & Claw-back
+  description: Generation and maintenance of privilege logs with claw-back support.
+  capability_type: core
+  satisfies_requirements:
+  - req:REQ-PRIVILEGE-PROTECTION
+  supports_jobs:
+  - jtbd:JOB-T3-EVIDENCE
+  - jtbd:JOB-T3-MICRO-M5-PRIVILEGE-2
+  - jtbd:JOB-T3-MICRO-M2-COLLECT-3
+  supports_desired_outcomes:
+  - jtbd:OUT-T3-MIN-SANCTIONS-RISK
+  implementation_status: in_progress
+  owner: Discovery Product
+  status: active
+  version: '1.0'
+- id: req:CAP-DISCOVERY-WORKFLOW
+  pref_label: Discovery Workflow Orchestration
+  description: End-to-end orchestration of collection, review, and production steps.
+  capability_type: core
+  satisfies_requirements:
+  - req:REQ-EDISC-COST-CONTROL
+  - req:REQ-PRIVILEGE-PROTECTION
+  supports_jobs:
+  - jtbd:JOB-T3-EVIDENCE
+  - jtbd:JOB-T3-MICRO-M1-PLAN-2
+  - jtbd:JOB-T3-M2-COLLECT
+  - jtbd:JOB-T3-MICRO-M2-COLLECT-3
+  - jtbd:JOB-T3-MICRO-M5-PRIVILEGE-2
+  - jtbd:JOB-T3-M6-PRODUCE
+  supports_desired_outcomes:
+  - jtbd:OUT-T3-MIN-DISCOVERY-COST
+  - jtbd:OUT-T3-MAX-RECORD-COMPLETENESS
+  - jtbd:OUT-T3-MIN-SANCTIONS-RISK
+  implementation_status: planned
+  owner: Discovery Product
+  status: active
+  version: '1.0'
+- id: req:CAP-CASE-ASSESSMENT
+  pref_label: Structured Early Case Assessment
+  description: Guided assessment of merits, exposure, and resolution options.
+  capability_type: supporting
+  satisfies_requirements:
+  - req:REQ-EARLY-CASE-ASSESSMENT
+  supports_jobs:
+  - jtbd:JOB-T2-M1-EVALUATE
+  - jtbd:JOB-T2-MICRO-M1-EVALUATE-2
+  - jtbd:JOB-T1-M1-ASSESS-OPTIONS
+  - jtbd:JOB-T1-MICRO-RECOMMEND-POSTURE
+  supports_desired_outcomes:
+  - jtbd:OUT-T2-M1-MIN-UNCERTAINTY-MERITS
+  - jtbd:OUT-T1-M1-MAX-OPTION-QUALITY
+  implementation_status: idea
+  owner: Strategy Product
+  status: active
+  version: '1.0'
+- id: req:CAP-STATUS-DASHBOARD
+  pref_label: Client Status Dashboard
+  description: Secure, near-real-time view of matter status for clients.
+  capability_type: supporting
+  satisfies_requirements:
+  - req:REQ-CLIENT-STATUS-DASHBOARD
+  supports_jobs:
+  - jtbd:JOB-T6-M4-CLIENT
+  - jtbd:JOB-T1-RESOLVE
+  supports_desired_outcomes:
+  - jtbd:OUT-T6-M4-MAX-CLIENT-CLARITY
+  - jtbd:OUT-T1-MIN-TIME-TO-RESOLVE
+  implementation_status: planned
+  owner: Client Experience
+  status: active
+  version: '1.0'
+- id: req:CAP-TAGGING-SERVICE
+  pref_label: SALI-compatible Tagging Service
+  description: Application and management of standard legal matter tags.
+  capability_type: enabling
+  satisfies_requirements:
+  - req:REQ-SALI-TAGGING
+  supports_jobs:
+  - jtbd:JOB-R5-KNOWLEDGE
+  - jtbd:JOB-T1-M4-CLOSE
+  supports_desired_outcomes:
+  - jtbd:OUT-T1-M4-MAX-CLOSURE-COMPLETENESS
+  - jtbd:OUT-T1-MIN-TOTAL-COST
+  implementation_status: planned
+  owner: Data Platform
+  status: active
+  version: '1.0'
+- id: req:CAP-ANALYTICS-ENGINE
+  pref_label: Matter Analytics Engine
+  description: Cross-matter analytics, benchmarking, and prediction support.
+  capability_type: enabling
+  satisfies_requirements:
+  - req:REQ-EARLY-CASE-ASSESSMENT
+  - req:REQ-SALI-TAGGING
+  supports_jobs:
+  - jtbd:JOB-T1-RESOLVE
+  - jtbd:JOB-T2-M1-EVALUATE
+  supports_desired_outcomes:
+  - jtbd:OUT-T1-MAX-FAVORABLE
+  - jtbd:OUT-T2-M1-MIN-UNCERTAINTY-MERITS
+  implementation_status: idea
+  owner: Data & Analytics
+  status: active
+  version: '1.0'
