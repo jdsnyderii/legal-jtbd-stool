@@ -2,6 +2,47 @@
 
 A plain-language guide to how this project turns **ideas about legal work** into **structured data** that people and software (including AI agents) can share, check, and query.
 
+## Metadata flow at a glance
+
+```mermaid
+flowchart LR
+  subgraph rules ["1. Rules"]
+    L1["LinkML models\n(Jobs · Investments · Requirements)"]
+  end
+
+  subgraph binder ["2. Combined model"]
+    U["Unified model\n(one consistent contract)"]
+  end
+
+  subgraph cabinets ["3. Database structure"]
+    S["Generated schema.sql"]
+    DB[("Empty SQLite database")]
+  end
+
+  subgraph papers ["4. Catalog data"]
+    I["Instance YAML\n(real jobs, outcomes, …)"]
+    L["Loader script"]
+    F[("Filled database\nqueryable catalog")]
+  end
+
+  L1 --> U
+  U --> S
+  S --> DB
+  I --> L
+  DB --> L
+  L --> F
+
+  style L1 fill:#e8f4fc,stroke:#1a6ea8
+  style U fill:#eef6e8,stroke:#3d7a2e
+  style S fill:#faf3e0,stroke:#a67c1a
+  style DB fill:#faf3e0,stroke:#a67c1a
+  style I fill:#f5e8f5,stroke:#7a3d7a
+  style L fill:#f5e8f5,stroke:#7a3d7a
+  style F fill:#e8f8f0,stroke:#1a7a4c
+```
+
+**Read left to right:** write the rules → combine them → generate the empty database shape → load the real catalog into that shape. Do not invent database columns or catalog fields outside this chain.
+
 ---
 
 ## Why this matters
