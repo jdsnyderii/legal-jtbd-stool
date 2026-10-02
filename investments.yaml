@@ -1,0 +1,36 @@
+id: https://example.org/legal-jtbd/investments
+name: LegalJTBDInvestments
+version: 0.4.0
+prefixes:
+  inv: https://example.org/legal-jtbd/investments/
+  jtbd: https://example.org/legal-jtbd/jobs/
+  gf: https://example.org/legal-jtbd/graph-foundation/
+default_prefix: inv
+imports:
+  - linkml:types
+  - gf:graph_foundation
+classes:
+  InvestmentLane:
+    is_a: GraphNode
+    slots: [horizon, strategic_weight, product_outcomes, owner]
+  ProductOutcome:
+    is_a: GraphNode
+    slots: [lane, informed_by_outcomes, target_metric, target_value, current_value, target_date]
+slots:
+  horizon: {range: InvestmentHorizon}
+  strategic_weight: {range: float}
+  product_outcomes: {range: ProductOutcome, multivalued: true}
+  owner: {range: string}
+  lane: {range: InvestmentLane}
+  informed_by_outcomes: {range: DesiredOutcome, multivalued: true}
+  target_metric: {range: string}
+  target_value: {range: string}
+  current_value: {range: string}
+  target_date: {range: date}
+enums:
+  InvestmentHorizon:
+    permissible_values:
+      now: {}
+      next: {}
+      later: {}
+      explore: {}
