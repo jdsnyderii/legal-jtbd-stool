@@ -1,0 +1,130 @@
+id: https://jtbdtoolkit.com/schema/jtbd-hypothesis-canvas
+name: JTBDHypothesisCanvas
+title: JTBD Hypothesis Canvas
+description: >
+  LinkML schema for the official JTBD Hypothesis Canvas (V3) as defined by
+  Jim Kalbach & Elaine Matthias (JTBD Toolkit). Captures the Frame-phase
+  scoping and hypothesis elements used before deep research.
+version: 1.0.0
+license: CC-BY-NC-ND-4.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  jtbd: https://jtbdtoolkit.com/schema/
+  schema: http://schema.org/
+
+default_prefix: jtbd
+default_range: string
+
+imports:
+  - linkml:types
+
+classes:
+
+  JTBDHypothesisCanvas:
+    description: >
+      Root class representing a complete JTBD Hypothesis Canvas instance.
+      Corresponds to the official visual layout at jtbd.tk/canvas.
+    attributes:
+      playing_field:
+        description: >
+          What area or domain are you in? Plain-language description of the
+          value-creation context (not a broad industry label).
+        range: string
+        required: true
+      job_performer:
+        description: Who are you creating value for? The executor of the Focus Job.
+        range: string
+        required: true
+      focus_job:
+        description: >
+          The core unit of analysis. A functional job with beginning, middle,
+          and end. Formulated with an action verb, solution-agnostic, singular.
+        range: string
+        required: true
+      aspirations:
+        description: >
+          Higher-order “be” goals. Who the job performer aspires to become
+          by doing the Focus Job. Typically 2–3 items.
+        range: string
+        multivalued: true
+        required: false
+      related_jobs:
+        description: >
+          Other functional jobs at a similar level of granularity that the
+          job performer is also trying to get done in the same playing field.
+        range: string
+        multivalued: true
+        required: false
+      job_steps:
+        description: >
+          Chronological process of getting the Focus Job done.
+          Can be supplied as free-text phases or structured steps.
+        range: JobSteps
+        required: false
+      success_criteria:
+        description: >
+          How the job performer measures success. Prefer minimize/maximize
+          + unit of measure + qualifier formulation.
+        range: string
+        multivalued: true
+        required: false
+      emotions:
+        description: >
+          How the job performer feels (or wants to avoid feeling) while
+          doing the job. Prefer “feel …” / “avoid feeling …” formulation.
+        range: string
+        multivalued: true
+        required: false
+      circumstances:
+        description: >
+          Contextual factors that change how the job gets done.
+          Prefer “whether …” formulation.
+        range: string
+        multivalued: true
+        required: false
+      meta:
+        description: Optional metadata about this canvas instance.
+        range: CanvasMeta
+        required: false
+
+  JobSteps:
+    description: Structured representation of the job map / process.
+    attributes:
+      beginning:
+        description: Steps that occur at the start of the job.
+        range: string
+        required: false
+      middle:
+        description: Core execution steps.
+        range: string
+        required: false
+      end:
+        description: Closing / transition steps.
+        range: string
+        required: false
+      stages:
+        description: Optional ordered list of stage labels (e.g. PLAN, PREPARE…).
+        range: string
+        multivalued: true
+        required: false
+      notes:
+        description: Free-text fallback if structured phases are not used.
+        range: string
+        required: false
+
+  CanvasMeta:
+    description: Provenance and usage notes for the canvas instance.
+    attributes:
+      title:
+        range: string
+      version:
+        range: string
+      author:
+        range: string
+      description:
+        range: string
+      created:
+        range: string
+      source:
+        range: string

@@ -1,0 +1,44 @@
+playing_field: "Helping lawyers resolve disputes on behalf of clients through the litigation process."
+job_performer: "Litigation partner who owns the client relationship and case strategy"
+focus_job: "Respond to a filed complaint on a client's behalf"
+aspirations:
+  - "Be a trusted advisor the client turns to first when things go wrong"
+  - "Be someone who protects the client's position and the firm's reputation"
+  - "Be in control of the case's direction from the start"
+related_jobs:
+  - "Advise the client on exposure and settlement posture"
+  - "Staff and direct the defense team"
+  - "Manage the client relationship and expectations through the dispute"
+  - "Ensure the client meets its preservation obligations"
+  - "Determine insurance coverage and notify carriers"
+job_steps:
+  stages:
+    - PLAN
+    - PREPARE
+    - EXECUTE
+    - MONITOR
+    - MODIFY
+    - CONCLUDE
+  beginning: "Confirm the complaint's service and response deadline → Determine the nature and magnitude of the client's exposure → Assess conflicts and authority to act"
+  middle: "Evaluate the claims and available defenses → Decide the response strategy → Direct the preparation of the response → Obtain client input and approval"
+  end: "Finalize the response → Submit the response to the court → Confirm the response is on record → Communicate next steps to the client"
+success_criteria:
+  - "Minimize the time to reach clarity on the nature and magnitude of exposure"
+  - "Minimize the likelihood of missing a deadline or waiving a defense"
+  - "Maximize the client's confidence in the chosen response strategy"
+  - "Minimize the cost of preparing the initial response"
+emotions:
+  - "Feel in control of the situation"
+  - "Feel confident that no defense has been overlooked"
+  - "Avoid feeling blindsided by the client or opposing counsel"
+  - "Avoid feeling exposed to malpractice or reputational risk"
+circumstances:
+  - "Whether the client is a repeat client or new"
+  - "Whether the complaint was anticipated or a surprise"
+  - "Whether the exposure is large or small relative to the client"
+  - "Whether insurance coverage applies"
+  - "Whether the deadline is tight or an extension is available"
+meta:
+  title: "Litigation partner: respond to a filed complaint"
+  version: "1.0"
+  source: "Official JTBD Hypothesis Canvas structure (jtbd.tk/canvas)"

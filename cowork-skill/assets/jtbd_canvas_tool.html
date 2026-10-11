@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JTBD Canvas V3 – Hypothesis</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#d9d9dc;color:#111;font-family:Helvetica,Arial,"Helvetica Neue",sans-serif}
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:10px 14px;background:#fff;border-bottom:1px solid #ccc;font-size:14px}
+.bar input[type=text]{flex:1;min-width:200px;padding:6px 8px;border:1px solid #bbb;border-radius:6px;font:inherit}
+.bar button{font:inherit;padding:6px 12px;border:1px solid #bbb;background:#fff;border-radius:6px;cursor:pointer}
+.bar button.p{background:#2f5fd0;border-color:#2f5fd0;color:#fff;font-weight:600}
+.bar .hint{color:#777;font-size:12px;flex-basis:100%}
+.wrap{overflow-x:auto;padding:16px 12px 40px}
+.paper{--paper:#f0f0f0;container-type:inline-size;min-width:760px;max-width:1105px;margin:0 auto;background:var(--paper);box-shadow:0 2px 14px rgba(0,0,0,.25)}
+.sheet{font-size:calc(100cqw / 110.5);position:relative;min-height:142em;display:flex;flex-direction:column;padding-top:6.4em}
+.side{position:absolute;left:2.4em;top:58em;writing-mode:vertical-rl;transform:rotate(180deg);line-height:1.15}
+.side b{font-size:1.4em}.side span{font-size:1.2em}
+.pill{width:23.5em;height:3.3em;line-height:3.3em;margin:0 auto;border:.1em solid #cfcfcf;border-radius:.6em;background:#fff;text-align:center;color:#999}
+.pill span{font-size:1.1em}
+.pf{margin:.9em 8.3em 1.5em;text-align:center}
+.box{margin-left:8.3em;width:97.2em;border:.3em solid #111}
+.cell{padding:1.2em 1.1em}
+h3{font-size:1.5em;margin:0 0 .55em}h3.c{text-align:center}
+.r1{display:grid;grid-template-columns:27fr 46fr 27fr}
+.r1>.cell+.cell{border-left:.3em solid #111}
+.asp{position:relative;padding-bottom:14.9em}
+.dome{position:absolute;left:50%;bottom:0;transform:translateX(-50%);width:28.4em;height:14.2em;border:.3em solid #111;border-bottom:0;border-radius:14.2em 14.2em 0 0;background:var(--paper);text-align:center;padding:3.4em 2.4em 0;z-index:2}
+.dome h2{font-size:2.1em;margin:0 0 .55em}
+.row{border-top:.3em solid #111}
+.r2{min-height:28em}.r3{min-height:21.3em}
+.r4{display:grid;grid-template-columns:1fr 1fr;min-height:20.9em}
+.r4>.cell+.cell{border-left:.3em solid #111}
+.sh{display:flex;align-items:baseline;margin-bottom:.4em}
+.sh h3{width:14em;margin:0;flex:none}
+.stages{flex:1;display:grid;grid-template-columns:repeat(6,1fr);color:#aaa;font-size:1.1em;text-transform:uppercase}
+.lbl{font-weight:700;font-size:1.2em;margin:.9em 0 .25em}
+.ed{outline:none;font-size:1.2em;line-height:1.5;min-height:1.5em;cursor:text}
+.ed:focus{background:rgba(47,95,208,.09)}
+[data-ph]:empty::before{content:attr(data-ph);color:#b3b3b3}
+ul.ed{list-style:none;margin:0;padding:0}
+ul.ed li{padding-left:1em;text-indent:-1em}
+ul.ed li::before{content:"• "}
+ul.st li{display:inline;padding:0;text-indent:0}
+ul.st li::before{content:none}
+ul.st li:not(:last-child)::after{content:" → "}
+ul.st:focus li{display:list-item;padding-left:1em;text-indent:-1em}
+ul.st:focus li::before{content:"• "}
+ul.st:focus li::after{content:none}
+.fj{font-weight:700;font-size:1.4em;line-height:1.35}
+.foot{margin:auto 5em 3.2em 8.3em;display:flex;justify-content:space-between;color:#444}
+.foot span{font-size:1.05em}.box{margin-bottom:2.4em}
+@media print{
+ body{background:#fff}.bar{display:none}.wrap{padding:0;overflow:visible}
+ .paper{--paper:#fff;box-shadow:none;max-width:none;min-width:0}
+ .sheet{min-height:141.5em}.ed:focus,ul.st:focus{background:none}
+ [data-ph]:empty::before{content:none}
+ @page{size:letter;margin:0}
+ *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style></head><body>
+<div class="bar">
+ <input type="text" id="title" placeholder="Canvas title (saved in YAML meta)">
+ <button id="load">Load YAML…</button><button id="save" class="p">Save YAML</button><button id="pdf" class="p">Save as PDF</button><button id="reset">Reset</button>
+ <input type="file" id="file" accept=".yaml,.yml,.txt" hidden>
+ <span class="hint">Click any text on the canvas to edit. Enter adds a new bullet. Job steps show as a flow and switch to one step per line while you edit.</span>
+</div>
+<div class="wrap"><div class="paper"><div class="sheet">
+ <div class="side"><b>JTBD CANVAS</b><br><span>HYPOTHESIS</span></div>
+ <div class="pill"><span>Playing Field</span></div>
+ <div class="ed single" id="pf" contenteditable="true" data-ph="We’re in the business of …"></div>
+ <div class="box">
+  <div class="r1">
+   <div class="cell"><h3>Job Performer</h3><div class="ed single" id="jp" contenteditable="true" data-ph="Who executes the job?"></div></div>
+   <div class="cell asp"><h3 class="c">Aspirations</h3><ul class="ed" id="asp" contenteditable="true"></ul>
+    <div class="dome"><h2>Focus Job</h2><div class="ed single fj" id="fj" contenteditable="true" data-ph="Start with an action verb"></div></div></div>
+   <div class="cell"><h3>Related Jobs</h3><ul class="ed" id="rel" contenteditable="true"></ul></div>
+  </div>
+  <div class="row r2 cell">
+   <div class="sh"><h3>Job Steps</h3><div class="stages"><span>Plan</span><span>Prepare</span><span>Execute</span><span>Monitor</span><span>Modify</span><span>Conclude</span></div></div>
+   <div class="lbl">Beginning:</div><ul class="ed st" id="beg" contenteditable="true"></ul>
+   <div class="lbl">Middle:</div><ul class="ed st" id="mid" contenteditable="true"></ul>
+   <div class="lbl">End:</div><ul class="ed st" id="fin" contenteditable="true"></ul>
+  </div>
+  <div class="row r3 cell"><h3>Success Criteria</h3><ul class="ed" id="sc" contenteditable="true"></ul></div>
+  <div class="row r4">
+   <div class="cell"><h3>Emotions</h3><ul class="ed" id="emo" contenteditable="true"></ul></div>
+   <div class="cell"><h3>Circumstances</h3><ul class="ed" id="cir" contenteditable="true"></ul></div>
+  </div>
+ </div>
+ <div class="foot"><span>V3</span><span>DETAILS: jtbd.tk/canvas</span><span>Jim Kalbach &amp; Elaine Matthias, JTBDToolkit.com &nbsp; CC BY-NC-ND 4.0</span></div>
+</div></div></div>
+<script>
+const DEF={title:"",
+playing_field:"",
+job_performer:"",
+focus_job:"",
+aspirations:[],
+related_jobs:[],
+beginning:[],
+middle:[],
+end:[],
+success_criteria:[],
+emotions:[],
+circumstances:[]};
+const $=id=>document.getElementById(id);
+const SINGLE={playing_field:"pf",job_performer:"jp",focus_job:"fj"};
+const LIST={aspirations:"asp",related_jobs:"rel",success_criteria:"sc",emotions:"emo",circumstances:"cir",beginning:"beg",middle:"mid",end:"fin"};
+const STAGES=["PLAN","PREPARE","EXECUTE","MONITOR","MODIFY","CONCLUDE"];
+function items(el){const li=el.querySelectorAll("li");const a=li.length?[...li].map(x=>x.textContent):el.innerText.split("\n");return a.map(s=>s.replace(/\s+/g," ").trim()).filter(Boolean)}
+function setList(el,a){el.innerHTML="";(a.length?a:[""]).forEach(t=>{const li=document.createElement("li");li.textContent=t;el.append(li)})}
+function data(){const D={title:$("title").value.trim()};for(const k in SINGLE)D[k]=$(SINGLE[k]).textContent.replace(/\s+/g," ").trim();for(const k in LIST)D[k]=items($(LIST[k]));return D}
+function fill(D){$("title").value=D.title||"";for(const k in SINGLE)$(SINGLE[k]).textContent=D[k]||"";for(const k in LIST)setList($(LIST[k]),D[k]||[])}
+// keep editing tidy
+document.querySelectorAll(".single").forEach(e=>e.addEventListener("keydown",ev=>{if(ev.key==="Enter")ev.preventDefault()}));
+document.querySelectorAll("[contenteditable]").forEach(e=>e.addEventListener("paste",ev=>{ev.preventDefault();document.execCommand("insertText",false,ev.clipboardData.getData("text/plain").replace(e.classList.contains("single")?/\s*\n\s*/g:/\r/g," "))}));
+document.querySelectorAll("ul.ed").forEach(e=>e.addEventListener("blur",()=>setList(e,items(e))));
+// YAML out
+const q=s=>JSON.stringify(s);
+function toYaml(D){const bl=k=>k+":\n"+(D[k].length?D[k]:[""]).map(v=>"  - "+q(v)).join("\n");
+return["playing_field: "+q(D.playing_field),"job_performer: "+q(D.job_performer),"focus_job: "+q(D.focus_job),bl("aspirations"),bl("related_jobs"),
+"job_steps:\n  stages:\n"+STAGES.map(s=>"    - "+s).join("\n")+"\n  beginning: "+q(D.beginning.join(" → "))+"\n  middle: "+q(D.middle.join(" → "))+"\n  end: "+q(D.end.join(" → ")),
+bl("success_criteria"),bl("emotions"),bl("circumstances"),
+"meta:\n  title: "+q(D.title)+'\n  version: "1.0"\n  source: "Official JTBD Hypothesis Canvas structure (jtbd.tk/canvas)"'].join("\n")+"\n"}
+// YAML in (subset: maps, lists, quoted/plain scalars, > and | blocks)
+function sc(v){v=v.trim();if(v[0]=='"'){try{return JSON.parse(v)}catch(e){return v.slice(1,-1)}}if(v[0]=="'")return v.slice(1,-1).replace(/''/g,"'");return v}
+const ind=l=>l.match(/^ */)[0].length;
+function parse(L,i,n){let res=null;
+ while(i<L.length){const l=L[i];if(!l.trim()){i++;continue}const c=ind(l);if(c<n)break;const t=l.trim();
+  if(t.startsWith("- ")){if(res&&!Array.isArray(res))break;res=res||[];res.push(sc(t.slice(2)));i++}
+  else{if(Array.isArray(res))break;const m=t.match(/^([\w-]+):\s*(.*)$/);if(!m){i++;continue}res=res||{};const k=m[1],v=m[2];i++;
+   if(/^[>|]-?$/.test(v)){const p=[];while(i<L.length&&(!L[i].trim()||ind(L[i])>c)){p.push(L[i].trim());i++}res[k]=p.filter(Boolean).join(v[0]===">"?" ":"\n")}
+   else if(v===""){let j=i;while(j<L.length&&!L[j].trim())j++;
+    if(j<L.length&&(ind(L[j])>c||(ind(L[j])===c&&L[j].trim().startsWith("- ")))){const r=parse(L,j,ind(L[j]));res[k]=r[0];i=r[1]}else res[k]=""}
+   else res[k]=sc(v)}}
+ return[res,i]}
+function fromYaml(txt){const L=txt.replace(/\r/g,"").split("\n").filter(l=>!/^\s*#/.test(l));const y=parse(L,0,0)[0]||{};const js=y.job_steps||{};
+ const as=v=>Array.isArray(v)?v:(v?[v]:[]);const sp=s=>(s||"").split(/\n|→/).map(x=>x.trim()).filter(Boolean);
+ return{title:(y.meta&&y.meta.title)||"",playing_field:y.playing_field||"",job_performer:y.job_performer||"",focus_job:y.focus_job||"",
+  aspirations:as(y.aspirations),related_jobs:as(y.related_jobs),beginning:sp(js.beginning),middle:sp(js.middle),end:sp(js.end),
+  success_criteria:as(y.success_criteria),emotions:as(y.emotions),circumstances:as(y.circumstances)}}
+// file + print
+$("save").onclick=()=>{const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([toYaml(data())],{type:"text/yaml"}));a.download="canvas.yaml";document.body.append(a);a.click();a.remove()};
+$("load").onclick=()=>$("file").click();
+$("file").onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{fill(fromYaml(r.result))}catch(err){alert("Could not read that YAML: "+err.message)}};r.readAsText(f);e.target.value=""};
+$("pdf").onclick=()=>{if(document.activeElement)document.activeElement.blur();const t=document.title;document.title="JTBD Canvas - "+($("title").value||"Hypothesis");setTimeout(()=>{window.print();document.title=t},80)};
+$("reset").onclick=()=>{if(confirm("Reset to the starting values?"))fill(DEF)};
+fill(DEF);
+</script></body></html>
