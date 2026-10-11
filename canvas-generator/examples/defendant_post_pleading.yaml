@@ -1,0 +1,93 @@
+# JTBD Hypothesis Canvas Instance
+# Conforms to: jtbd_hypothesis_canvas.linkml.yaml
+# Domain: Defendant – early post-pleading stage
+
+playing_field: >
+  Defending formal civil/commercial claims — early post-filing /
+  post-service phase after a pleading appears on the docket following investigation
+
+job_performer: >
+  Defendant organization and its key stakeholders (business decision-makers,
+  in-house counsel, outside counsel team, risk/insurance leads).
+  Primary focus: the party responsible for protecting the defendant’s interests
+  once a formal claim is asserted.
+
+focus_job: >
+  Resolve a formal legal claim asserted against us while protecting interests
+  and minimizing overall harm
+
+aspirations:
+  - Be a competent, prepared, strategically disciplined party that controls risk rather than being controlled by the process
+  - Emerge from the early phase with clarity on exposure, a defensible position on the record, and maximum optionality
+  - Demonstrate responsible stewardship of the organization’s legal and business interests
+
+related_jobs:
+  - Maintain business continuity and operational focus during the dispute
+  - Protect reputation with customers, partners, regulators, employees, and investors
+  - Manage insurance coverage and notification obligations
+  - Preserve privilege and control information flow
+  - Position the organization for later phases if early resolution is not achieved
+  - Satisfy internal governance, board, and compliance reporting needs
+
+job_steps:
+  stages:
+    - PLAN
+    - PREPARE
+    - EXECUTE
+    - MONITOR
+    - MODIFY
+    - CONCLUDE
+  beginning: >
+    Recognize formal assertion of the claim → Obtain and parse the pleading and
+    docket information → Map allegations against known facts and prior investigation →
+    Estimate exposure range and collateral risks → Identify jurisdictional or procedural
+    defects, deadlines, and waiver risks → Clarify internal stakeholders, decision rights,
+    and constraints
+  middle: >
+    Align internal stakeholders → Generate and compare strategic pathways →
+    Weigh trade-offs of cost, time, precedent, and relationships → Select response
+    vehicle(s) and case theory → Issue preservation directives and secure relevant
+    information → Prepare and execute the initial formal response → Establish defensive
+    position on the record → Initiate or respond to early engagement with the opposing
+    side and the process
+  end: >
+    Monitor early reactions and deadlines → Reassess and adapt strategy →
+    Document lessons, open items, and hand-off points → Confirm the claim is joined
+    and the defense is positioned for the next phase
+
+success_criteria:
+  - Minimize the time to reach clarity on the nature and magnitude of exposure
+  - Maximize preservation of all viable procedural and substantive defenses
+  - Minimize the risk of waiver, default, or adverse early procedural rulings
+  - Minimize unnecessary cost and distraction in the response window
+  - Maximize internal alignment and decision quality under time pressure
+  - Maximize optionality for early resolution or efficient later-stage defense
+  - Minimize reputational or relationship damage from early handling of the claim
+  - Ensure complete and timely compliance with all court and insurance notice obligations
+
+emotions:
+  - Feel in control of the early response process
+  - Feel confident that viable defenses are preserved
+  - Feel prepared rather than blindsided
+  - Avoid feeling uncertain about exposure or next steps
+  - Avoid feeling the organization appears unprepared
+  - Feel leadership and teams are aligned and supported
+
+circumstances:
+  - Whether the claim is routine versus high-stakes or reputationally sensitive
+  - Whether the forum is federal court, state court, or arbitration
+  - Whether an ongoing business relationship with the plaintiff exists
+  - Whether insurance coverage and carrier involvement apply
+  - Whether public/media visibility or parallel regulatory exposure exists
+  - Whether internal investigation and document readiness is strong or weak
+  - Whether resource and bandwidth constraints are significant
+  - Whether related claims, class potential, or multi-district issues exist
+
+meta:
+  title: Defendant Post-Pleading Stage
+  version: "1.0"
+  author: Generated from Kalbach JTBD analysis
+  description: >
+    Hypothesis canvas for the defendant side at the moment a formal pleading
+    has been received via docket entry (post-investigation).
+  source: Official JTBD Hypothesis Canvas structure (jtbd.tk/canvas)
