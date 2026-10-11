@@ -10,9 +10,9 @@ This package models **Jobs to Be Done (JTBD)** for **US civil litigation** as a 
 
 | Leg | LinkML schema | Instance data | Role |
 |-----|---------------|---------------|------|
-| **Jobs & outcomes** | `jobs.yaml` (+ `graph_foundation.yaml`) | `jobs-instance.yaml` | Kalbach Main Jobs → mid → micro; desired outcomes |
-| **Investment lanes** | `investments.yaml` | `investments-instance.yaml` | Where product value is cataloged (lanes + product outcomes) |
-| **Requirements & capabilities** | `product_requirements.yaml` | `product-requirements-instance.yaml` | Requirements → capabilities that support jobs/outcomes |
+| **Jobs & outcomes** | `models/jobs.yaml` (+ `models/graph_foundation.yaml`) | `models/jobs-instance.yaml` | Kalbach Main Jobs → mid → micro; desired outcomes |
+| **Investment lanes** | `models/investments.yaml` | `models/investments-instance.yaml` | Where product value is cataloged (lanes + product outcomes) |
+| **Requirements & capabilities** | `models/product_requirements.yaml` | `models/product-requirements-instance.yaml` | Requirements → capabilities that support jobs/outcomes |
 
 Together they form a **three-legged stool**: product work should be traceable from **job/outcome → product outcome → requirement → capability**.
 
@@ -115,11 +115,11 @@ LinkML classes/slots may carry `graph_role: node` or `graph_role: edge` (annotat
 
 | File | Contents |
 |------|----------|
-| `graph_foundation.yaml` | `SemanticId`, abstract `Identifiable` / `GraphNode` / `GraphEdge`, lifecycle status |
-| `jobs.yaml` | Job, DesiredOutcome, levels, phases, iterative |
-| `investments.yaml` | InvestmentLane, ProductOutcome, horizon |
-| `product_requirements.yaml` | Requirement, Capability |
-| `unified_inline.yaml` | Merged schema for SQL generation (imports stripped, annotations stripped for loader compatibility) |
+| `models/graph_foundation.yaml` | `SemanticId`, abstract `Identifiable` / `GraphNode` / `GraphEdge`, lifecycle status |
+| `models/jobs.yaml` | Job, DesiredOutcome, levels, phases, iterative |
+| `models/investments.yaml` | InvestmentLane, ProductOutcome, horizon |
+| `models/product_requirements.yaml` | Requirement, Capability |
+| `models/unified_inline.yaml` | Merged schema for SQL generation (imports stripped, annotations stripped for loader compatibility) |
 
 ### 4.2 Class-typed edges (important)
 
@@ -154,13 +154,13 @@ Gaps relative to production needs:
 | Abstract bases | Optional tables | **Omit** (`Identifiable`, etc.) |
 | Views | None | Hierarchy + traceability views |
 
-**Canonical physical DDL is `schema.sql`**, derived from LinkML *plus* these physical conventions—not a competing hand model of the domain.
+**Canonical physical DDL is `generated/schema.sql`**, derived from LinkML *plus* these physical conventions—not a competing hand model of the domain.
 
-Raw generator output is kept as `generated_schema.sql` for regression comparison. Intermediate relational LinkML: `unified_relmodel.yaml`.
+Raw generator output is kept as `generated/generated_schema.sql` for regression comparison. Intermediate relational LinkML: `models/unified_relmodel.yaml`.
 
 ---
 
-## 5. Database conventions (`schema.sql` / `jtbd.sqlite`)
+## 5. Database conventions (`generated/schema.sql` / `generated/jtbd.sqlite`)
 
 ### 5.1 Node tables
 
@@ -211,11 +211,11 @@ product-requirements-instance.yaml
    jtbd.sqlite
 ```
 
-Instance CURIEs **must** resolve to IDs present in `jobs-instance.yaml` (T1–T6 era). Legacy IDs such as `jtbd:JOB-PROTECT-RIGHTS` or `jtbd:OUT-MIN-COST-DISCOVERY` are obsolete.
+Instance CURIEs **must** resolve to IDs present in `models/jobs-instance.yaml` (T1–T6 era). Legacy IDs such as `jtbd:JOB-PROTECT-RIGHTS` or `jtbd:OUT-MIN-COST-DISCOVERY` are obsolete.
 
 ---
 
-## 6. UI (`jtbd-editor.html`)
+## 6. UI (`generated/jtbd-editor.html`)
 
 **JTBD Workbench** — single-page editor for navigation and light editing.
 
@@ -227,7 +227,7 @@ Instance CURIEs **must** resolve to IDs present in `jobs-instance.yaml` (T1–T6
 
 ### 6.2 Data
 
-- Embedded sample from `sample-data.json` (built from YAML instances)  
+- Embedded sample from `generated/sample-data.json` (built from YAML instances)  
 - **Reload sample** resets from embed (works on `file://`)  
 - **Export YAML / JSON** downloads current in-memory model  
 
@@ -237,7 +237,7 @@ Instance CURIEs **must** resolve to IDs present in `jobs-instance.yaml` (T1–T6
 - Iterative mids marked with ↻  
 - Related jobs (R*) under a separate tree section  
 
-The editor is a **catalog/maintenance UI**, not a multi-user server. Persistence is export → YAML → `load_db.py` (or future WASM SQLite).
+The editor is a **catalog/maintenance UI**, not a multi-user server. Persistence is export → YAML → `generated/load_db.py` (or future WASM SQLite).
 
 ---
 
@@ -256,7 +256,7 @@ jtbd.sqlite  (same bucket or separate object; single-writer limitations)
 ```
 
 - WASM does **not** serve the UI; the UI is static HTML.  
-- Putting `jtbd.sqlite` in the **same S3 bucket** as the site is fine if fetch/CORS/presigned access is configured.  
+- Putting `generated/jtbd.sqlite` in the **same S3 bucket** as the site is fine if fetch/CORS/presigned access is configured.  
 - **Not multi-user safe** as a single shared SQLite file without a coordination layer.
 
 ---
@@ -266,20 +266,20 @@ jtbd.sqlite  (same bucket or separate object; single-writer limitations)
 | Path | Role |
 |------|------|
 | `AGENT.md` | This document |
-| `graph_foundation.yaml` | Shared identity & abstract graph types |
-| `jobs.yaml` / `investments.yaml` / `product_requirements.yaml` | LinkML schemas v0.4.0 |
-| `jobs-instance.yaml` | Full job hierarchy + outcomes |
-| `investments-instance.yaml` | Lanes + product outcomes (CURIEs aligned) |
-| `product-requirements-instance.yaml` | Requirements + capabilities (CURIEs aligned) |
-| `unified_inline.yaml` | Merged schema for tooling |
-| `unified_relmodel.yaml` | LinkML relational transform output |
-| `generated_schema.sql` | Raw `gen-sqltables`-style DDL (reference) |
-| `schema.sql` | **Canonical physical DDL** |
-| `jtbd.sqlite` | Loaded database |
-| `load_db.py` | YAML → SQLite loader |
-| `example_queries.sql` | Sample queries |
-| `jtbd-editor.html` | Workbench UI |
-| `sample-data.json` | Compact sample for the editor |
+| `models/graph_foundation.yaml` | Shared identity & abstract graph types |
+| `models/jobs.yaml` / `models/investments.yaml` / `models/product_requirements.yaml` | LinkML schemas v0.4.0 |
+| `models/jobs-instance.yaml` | Full job hierarchy + outcomes |
+| `models/investments-instance.yaml` | Lanes + product outcomes (CURIEs aligned) |
+| `models/product-requirements-instance.yaml` | Requirements + capabilities (CURIEs aligned) |
+| `models/unified_inline.yaml` | Merged schema for tooling |
+| `models/unified_relmodel.yaml` | LinkML relational transform output |
+| `generated/generated_schema.sql` | Raw `gen-sqltables`-style DDL (reference) |
+| `generated/schema.sql` | **Canonical physical DDL** |
+| `generated/jtbd.sqlite` | Loaded database |
+| `generated/load_db.py` | YAML → SQLite loader |
+| `generated/example_queries.sql` | Sample queries |
+| `generated/jtbd-editor.html` | Workbench UI |
+| `generated/sample-data.json` | Compact sample for the editor |
 | `jobs-hierarchy.xlsx` | Spreadsheet export of job tree + outcomes |
 
 ---
@@ -291,8 +291,8 @@ When changing this system:
 1. **Prefer SemanticId CURIEs** for all domain identity.  
 2. **Preserve three levels** (top / mid / micro) and `iterative` on mids that loop.  
 3. **Class-range** multivalued slots that must FK in SQL; keep external refs as `uriorcurie` only when intentionally out-of-schema.  
-4. After schema edits: refresh `unified_inline.yaml` → optional `generated_schema.sql` → update **`schema.sql`** physical conventions → `load_db.py` → `jtbd.sqlite`.  
-5. After instance edits: realign inv/req CURIEs to job/outcome IDs → reload DB → regenerate `sample-data.json` and refresh editor embed if needed.  
+4. After schema edits: refresh `models/unified_inline.yaml` → optional `generated/generated_schema.sql` → update **`generated/schema.sql`** physical conventions → `generated/load_db.py` → `generated/jtbd.sqlite`.  
+5. After instance edits: realign inv/req CURIEs to job/outcome IDs → reload DB → regenerate `generated/sample-data.json` and refresh editor embed if needed.  
 6. Do **not** reintroduce obsolete job IDs (`JOB-PROTECT-RIGHTS`, `JOB-DISCOVERY-MANAGE`, etc.).  
 7. Do **not** treat raw generator DDL as production without composite keys and clean names.  
 
@@ -327,33 +327,33 @@ Additive Job fields (process still = hierarchy only):
 - Done + story: `end_state`, `job_story_*`
 - Outcome: `object_of_control`
 
-See `TASKS-missing-fields.md`. T1–T6 tops are backfilled.
+See `docs/TASKS-missing-fields.md`. T1–T6 tops are backfilled.
 
 ## 12. schema.sql is always generated
 
-**Rule:** `schema.sql` is a **generated** artifact. Do not hand-edit it.
+**Rule:** `generated/schema.sql` is a **generated** artifact. Do not hand-edit it.
 
 Pipeline:
 
-1. Edit LinkML YAML (`graph_foundation.yaml`, `jobs.yaml`, `investments.yaml`, `product_requirements.yaml`)
-2. Run `python3 generate_schema.py` (builds `unified_inline.yaml` + physical `schema.sql`)
-3. Run `python3 load_db.py` → `jtbd.sqlite`
+1. Edit LinkML YAML (`models/graph_foundation.yaml`, `models/jobs.yaml`, `models/investments.yaml`, `models/product_requirements.yaml`)
+2. Run `python3 generate_schema.py` (builds `models/unified_inline.yaml` + physical `generated/schema.sql`)
+3. Run `python3 load_db.py` → `generated/jtbd.sqlite`
 
-Brute-force edits to `schema.sql` require explicit human permission.
-Physical conventions (snake_case, composite edge PKs, views) live in `generate_schema.py`, not in one-off SQL patches.
+Brute-force edits to `generated/schema.sql` require explicit human permission.
+Physical conventions (snake_case, composite edge PKs, views) live in `generated/generate_schema.py`, not in one-off SQL patches.
 
 ## 13. Editor vs database (known gap)
 
 | Path | Status |
 |------|--------|
-| YAML instances → `load_db.py` → `jtbd.sqlite` | **Works** |
-| YAML/`sample-data.json` embedded → `jtbd-editor.html` | **Works** |
-| Editor reads/writes `jtbd.sqlite` | **Gap** — editor does not use SQLite/WASM |
+| YAML instances → `generated/load_db.py` → `generated/jtbd.sqlite` | **Works** |
+| YAML/`generated/sample-data.json` embedded → `generated/jtbd-editor.html` | **Works** |
+| Editor reads/writes `generated/jtbd.sqlite` | **Gap** — editor does not use SQLite/WASM |
 
 Today the editor is a **catalog UI over embedded JSON** (exported from YAML). The database is a **separate queryable store** loaded from the same YAML. They stay aligned when you:
 
 1. Edit YAML (or export from editor → replace YAML)
 2. `python3 load_db.py`
-3. Refresh `sample-data.json` into the editor embed (or re-export pipeline)
+3. Refresh `generated/sample-data.json` into the editor embed (or re-export pipeline)
 
-Future option: SQLite WASM in the browser loading `jtbd.sqlite` (discussed architecture; not implemented).
+Future option: SQLite WASM in the browser loading `generated/jtbd.sqlite` (discussed architecture; not implemented).

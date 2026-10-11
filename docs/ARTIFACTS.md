@@ -2,13 +2,13 @@
 
 ## In git (source of truth for structure)
 
-- LinkML: `graph_foundation.yaml`, `jobs.yaml` (v0.5.0)
-- Docs: `README.md`, `AGENT.md`, `GENERATE.md`
-- `restore_large_artifacts.py`
+- LinkML: `../models/graph_foundation.yaml`, `../models/jobs.yaml` (v0.5.0)
+- Docs: `../README.md`, `AGENT.md`, `docs/GENERATE.md`
+- `../generated/restore_large_artifacts.py`
 
 ## Large binaries / full instances
 
-Full `jobs-instance.yaml`, `sample-data.json`, `jtbd-editor.html`, and `jtbd.sqlite` may exceed single-commit tooling limits from the agent.
+Full `../models/jobs-instance.yaml`, `../generated/sample-data.json`, `../generated/jtbd-editor.html`, and `../generated/jtbd.sqlite` may exceed single-commit tooling limits from the agent.
 
 **Authoritative local package:** `jtbd-models-complete.zip` produced in the modeling session.
 
@@ -21,4 +21,4 @@ python3 load_db.py           # when loader + instances present
 
 ## Design rules
 
-See `README.md` on `main` and `AGENT.md` on this branch.
+See `../README.md` on `main` and `AGENT.md` on this branch.

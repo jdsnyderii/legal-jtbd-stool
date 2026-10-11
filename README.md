@@ -17,9 +17,9 @@
 ## Design rules (non-negotiable)
 
 1. **Semantic identity** — CURIEs/IRIs as primary keys (`jtbd:JOB-…`, `inv:…`, `req:…`), not DB surrogate IDs for domain entities.
-2. **`schema.sql` is always generated** — edit LinkML, then run `python3 generate_schema.py`. Do not hand-edit DDL.
+2. **`generated/schema.sql` is always generated** — edit LinkML, then run `python3 generate_schema.py`. Do not hand-edit DDL.
 3. **Process = hierarchy** — job map is `parent_job` / `child_jobs` / `sequence_order` / `iterative`, not a bag of process fields on the main job.
-4. **Editor ≠ database (today)** — Workbench uses embedded JSON from YAML; SQLite is loaded separately via `load_db.py`.
+4. **Editor ≠ database (today)** — Workbench uses embedded JSON from YAML; SQLite is loaded separately via `generated/load_db.py`.
 
 ## Quick start (on the domain branch)
 
@@ -33,8 +33,8 @@ open jtbd-editor.html        # or serve statically
 ## Documentation on the domain branch
 
 - `AGENT.md` — full design choices and conventions
-- `GENERATE.md` — schema generation
-- `TASKS-missing-fields.md` — Kalbach field extension checklist
+- `docs/GENERATE.md` — schema generation
+- `docs/TASKS-missing-fields.md` — Kalbach field extension checklist
 
 ## License / privacy
 

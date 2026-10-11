@@ -52,13 +52,13 @@
 
 | # | Task | Status |
 |---|------|--------|
-| G1 | Update `jobs.yaml` (LinkML) with all new slots + Job/DesiredOutcome slot lists | done |
-| G2 | Update `schema.sql` (`job` + `desired_outcome` columns, all nullable except existing required) | done |
-| G3 | Update `load_db.py` INSERT columns for new fields | done |
-| G4 | Backfill a few top-level jobs in `jobs-instance.yaml` with statement + performer + end_state as examples | done |
-| G5 | Reload `jtbd.sqlite` | done |
-| G6 | Refresh `sample-data.json` | done |
-| G7 | Extend `jtbd-editor.html` job detail form with new fields | done |
+| G1 | Update `../models/jobs.yaml` (LinkML) with all new slots + Job/DesiredOutcome slot lists | done |
+| G2 | Update `../generated/schema.sql` (`job` + `desired_outcome` columns, all nullable except existing required) | done |
+| G3 | Update `../generated/load_db.py` INSERT columns for new fields | done |
+| G4 | Backfill a few top-level jobs in `../models/jobs-instance.yaml` with statement + performer + end_state as examples | done |
+| G5 | Reload `../generated/jtbd.sqlite` | done |
+| G6 | Refresh `../generated/sample-data.json` | done |
+| G7 | Extend `../generated/jtbd-editor.html` job detail form with new fields | done |
 | G8 | Mark this task list statuses complete; note in AGENT.md briefly | done |
 
 ---

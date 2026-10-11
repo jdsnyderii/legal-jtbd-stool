@@ -1,6 +1,6 @@
 # Generating schema.sql
 
-`schema.sql` is **always generated**. Never hand-edit.
+`../generated/schema.sql` is **always generated**. Never hand-edit.
 
 ```bash
 python3 generate_schema.py   # LinkML → schema.sql

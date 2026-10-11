@@ -68,7 +68,7 @@ Think of it like a filing system for a law firm’s playbook:
 |------|------------------|-----------------|
 | **1. Define the forms** | Design the blank forms (what fields exist, what is required) | **LinkML models** (YAML “schemas”) |
 | **2. Combine the forms** | Put all form types in one binder so nothing is missing | **Unified model** (all legs of the stool together) |
-| **3. Build the filing cabinets** | Build drawers and folders that match the forms | **Database schema** (`schema.sql` → SQLite) |
+| **3. Build the filing cabinets** | Build drawers and folders that match the forms | **Database schema** (`../generated/schema.sql` → SQLite) |
 | **4. File the real papers** | Fill out forms and put them in the right drawers | **Instance data** (YAML) → **load into the database** |
 
 ```
@@ -122,8 +122,8 @@ From the unified rules, a **database structure** is **generated**—tables, colu
 In this project:
 
 - A generator script reads the LinkML rules.
-- It writes **`schema.sql`** (the blueprint for SQLite).
-- **`schema.sql` is always generated.** It should not be hand-edited as the source of truth. If the cabinets need a new drawer, change the **rules** (LinkML), then regenerate.
+- It writes **`../generated/schema.sql`** (the blueprint for SQLite).
+- **`../generated/schema.sql` is always generated.** It should not be hand-edited as the source of truth. If the cabinets need a new drawer, change the **rules** (LinkML), then regenerate.
 
 What you get in practice:
 
@@ -145,11 +145,11 @@ Examples of instance files:
 - Investment lanes and product outcomes  
 - Requirements and capabilities  
 
-**Loading** means a script reads those files and inserts them into the database that was created from `schema.sql`.
+**Loading** means a script reads those files and inserts them into the database that was created from `../generated/schema.sql`.
 
 Order of operations that stays safe:
 
-1. Update or regenerate **`schema.sql`** from LinkML (if rules changed).  
+1. Update or regenerate **`../generated/schema.sql`** from LinkML (if rules changed).  
 2. Create or refresh the empty database from that schema.  
 3. Run the **loader** on the instance YAML files.  
 4. Query or browse the result (SQL tools, or a UI that uses an export of the same data).
@@ -190,7 +190,7 @@ When someone—or an agent—proposes a change, ask:
 
 1. **Rules** — Does LinkML already allow this field or relationship? If not, update the model first.  
 2. **Instances** — Is the real-world catalog updated in the YAML instances?  
-3. **Schema** — Was `schema.sql` regenerated from LinkML (not hand-patched)?  
+3. **Schema** — Was `../generated/schema.sql` regenerated from LinkML (not hand-patched)?  
 4. **Load** — Was the database reloaded so queries see the new facts?  
 5. **Consumers** — Do UI exports or documents still point at the same IDs?
 
@@ -211,4 +211,4 @@ If all five are yes, the system stays grounded.
 
 ---
 
-*This note describes the intended metadata flow for the legal JTBD stool project. For implementation detail, see `AGENT.md` and `GENERATE.md` on the domain branch.*
+*This note describes the intended metadata flow for the legal JTBD stool project. For implementation detail, see `../AGENT.md` and `docs/GENERATE.md` on the domain branch.*
